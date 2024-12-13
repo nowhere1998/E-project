@@ -1,0 +1,52 @@
+.clear {clear: both;}
+#main { padding: 1em; }
+
+.basic_main_area {width:100%; padding-top:15px; padding-bottom:15px;}
+
+
+.basic  {width: 100%;}
+.basic div {background-color: #ffffff;}
+
+
+.basic a {
+	cursor:pointer;
+	display:block;
+	margin-top: 0;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 18px;
+	color:#ffffff;
+	background-color: #797c82;
+	border-top: 1px solid #FFFFFF;
+	border-bottom: 1px solid #999;
+	/*background-image:url(../images/plus.png);*/
+	background-repeat: no-repeat;
+	background-position: right;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-left: 35px;
+	margin-bottom:10px;
+ }
+.basic a:hover {
+	background-color:#797c82;
+ }
+.basic a.selected {
+	color: #ffffff;
+	background-color: #4465ab;
+	background-image:url(../images/minus.png);
+	background-repeat: no-repeat;
+	background-position: right;	
+ }
+
+.star_user_win {color:#2d479d;border-top-width: 1px;border-bottom-width: 1px;border-top-style: solid;border-bottom-style: solid;border-top-color: #999;border-bottom-color: #999;text-align: center;float: left;width: 100%;margin-top: 10px;padding-top: 4px;padding-right: 0px;padding-bottom: 4px;
+padding-left: 0px;font-size: 16px;font-weight: bold;}
+
+.basic div .grid_photo {text-align:center; width:100%;}
+.basic div .grid_photo img {text-align:center; width:100%;}
+
+
+.star_point_left {width:50%; float:left; font-size:16px;}
+.star_points {background-image: url(images/star-rating-y.html);background-repeat: no-repeat;width:16px;height:15px;float:left;}
+.star_points:nth-child(4){background-image: url(images/star-rating-g.html);background-repeat: no-repeat;width:16px;height:15px;float:left;}
+.star_point_rating {width:47%;font-size:11px;float:right; text-align:right;}

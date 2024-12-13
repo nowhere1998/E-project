@@ -1,0 +1,878 @@
+.header_top_right ul {
+    height: 45px;
+}
+
+span.counter-point {
+    font-size: 40px;
+    font-family: fantasy;
+    color: #5F7D95;
+}
+
+.header_top_right ul li {
+    margin: 5px;
+    padding: 0px 7px 0 0px;
+    margin-right: 0;
+    margin-left: 0;
+    border-left: 1px solid #ccc;
+    height: 33px;
+    line-height: 38px;
+    padding-left: 15px;
+}
+
+.header_top_right ul li i {
+    font-size: 16px;
+}
+
+li.twitter:hover i {
+    color: #03A9F4;
+}
+
+li.facebook:hover i {
+    color: #3B5999;
+}
+
+li.pdf:hover i {
+    color: #fa8f8f;
+}
+
+li.login a:hover {
+    color: #08c;
+}
+
+.greeting-logo img {
+    width: 170px;
+}
+
+.container.second-header {
+    height: 75px;
+    line-height: 75px;
+    position: relative;
+}
+
+.col-md-9.main-menu {
+    height: 75px;
+    margin-top: -11px;
+    text-align: right !important;
+}
+
+ul#nav {
+    padding: 0;
+    height: 75px;
+    line-height: 75px;
+}
+
+li.srch {
+    padding: 0 10px;
+    list-style: none;
+    color: #ccc;
+    font-size: 30px;
+}
+
+nav ul li.srch:hover {
+    color: #999;
+    background: none;
+    cursor: pointer;
+}
+
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.search_area {
+    z-index: 10;
+    position: absolute;
+    float: right;
+    right: 100px;
+    padding: 15px;
+    background: #fff;
+    box-shadow: 1px 2px 3px #555;
+    width: 450px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: none;
+}
+
+input#searchCat {
+    border-radius: 2px;
+    height: 42px;
+    font-size: 15px;
+}
+
+.overlay-screen {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff0;
+    z-index: 2;
+    display: none;
+}
+
+.side-header {
+    position: fixed;
+    background: #f9f9f9;
+    right: -280px;
+    top: 0;
+    width: 250px;
+    bottom: 0;
+    height: 100%;
+    z-index: 100;
+    padding-top: 15px;
+    box-shadow: -1px 0px 5px 0px #999;
+    transition: .3s all;
+    overflow-y: auto;
+}
+
+.side-header i.fa.fa-times {
+    font-size: 37px;
+    padding-left: 20px;
+    color: #777;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+ul.side-nav {
+    padding: 0 8px;
+    list-style: none;
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+ul.side-nav li {
+    padding: 9px 10px;
+    margin-bottom: 2px;
+}
+
+ul.side-nav li a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #444;
+}
+
+ul.side-nav li:hover {
+    background: #eee;
+}
+
+.side-name-2 .dropdown-menu {
+    position: relative;
+    box-shadow: 0 0 black;
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    padding: 0;
+    margin-top: 10px !important;
+}
+
+li.dropdown.open {
+    padding: 9px 10px;
+    background: #eee;
+}
+
+ul.side-name-2 li.dropdown {
+    padding: 9px 0;
+}
+
+ul.side-name-2 li.dropdown a {
+    color: #333;
+    font-weight: 600;
+    padding: 3px 10px;
+    text-decoration: none;
+    width: 90%;
+    display: inline-block;
+}
+
+ul.side-name-2 ul.dropdown-menu {
+    padding: 0 !important;
+    margin: 0;
+    background: #fff;
+}
+
+ul.side-name-2 ul.dropdown-menu li {
+    padding: 4px 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+ul.side-name-2 ul.dropdown-menu li a {
+    background: none;
+}
+
+ul.side-name-2 ul.dropdown-menu li:hover {
+    background: #f5f5f5;
+}
+
+ul.side-name-2 ul.dropdown-menu li a {
+    padding: 0 !important;
+}
+
+ul.side-name-2 li.dropdown .caret {
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+ul.social-icon {
+    padding: 0;
+    list-style: none;
+}
+
+ul.social-icon li {
+    float: left;
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+ul.social-icon li a {
+    text-align: center;
+    padding: 3px 0px;
+    background: #fff;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+h4.follow-us {
+    font-size: 21px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.content img {
+    width: 223px;
+    margin-top: 17px;
+}
+
+.content {
+    font-size: 14px;
+    color: #abaeb5;
+    display: block;
+    width: 100%;
+    height: 92px;
+}
+
+.designed-by {
+    color: #fff;
+}
+
+.footer_area {
+    width: 100%;
+    background-color: #1f2b44;
+    float: left;
+    padding: 47px 0px;
+}
+
+.footer_middle {
+    text-align: center;
+    padding: 29px 0 8px;
+    float: left;
+    width: 100%;
+    background-color: #404882;
+    border-top: 1px solid #2b4071;
+}
+
+.footer_bottom {
+    text-align: center;
+    padding: 14px 14px 0;
+    float: left;
+    width: 100%;
+    background-color: #1D2246;
+}
+
+span.btn_box_img figure img {
+    margin-top: 17px;
+    width: 45px;
+}
+
+span.btn_box_img {
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 0px auto;
+    background: #F99D1C;
+    border-radius: 50px;
+}
+
+.send-step .col-md-2 img {
+    width: 50px;
+}
+
+.send-step .col-md-10 h1 {
+    font-size: 17px;
+    padding: 0;
+    text-transform: uppercase;
+    margin: 0;
+    color: #5F7D95;
+    font-weight: 700;
+}
+
+.send-step .col-md-10 p {
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
+    color: #5F7D95;
+    font-weight: 700;
+}
+
+.col-md-4.send-step {
+    padding: 25px 0;
+    border-right: 1px solid #ccc;
+}
+
+.steps {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #506374;
+}
+
+.subscribe .sub-input {
+    padding: 0;
+    margin-top: 16px;
+}
+
+.subscribe .sub-btn {
+    padding: 0;
+    margin-top: 16px;
+}
+
+.float-right {
+    float: right;
+}
+
+ul.nav-bottom li {
+    float: left;
+    text-transform: uppercase;
+    margin-right: 18px;
+}
+
+ul.nav-bottom {
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+}
+
+.bottom-link {
+    margin-top: 25px;
+}
+
+ul.nav-bottom li a {
+    padding: 5px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+span.greet_msg {
+    font-size: 24px;
+    display: block;
+    font-family: inherit;
+    color: #5F7D95;
+}
+
+.count_area .container {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    padding: 20px 0;
+}
+
+ul.award-ul {
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+}
+
+ul.award-ul li {
+    float: left;
+    margin: 15px;
+}
+
+ul.award-ul li div img {
+    width: 54px;
+    margin-left: 15px;
+}
+
+ul.award-ul span {
+    margin-top: 15px;
+    display: inline-block;
+}
+
+ul.award-ul span {
+    margin-top: 15px;
+    display: inline-block;
+    color: #5F7D95;
+    font-weight: 700;
+}
+
+.award_heading {
+    font-size: 45px;
+    text-transform: uppercase;
+    color: #5F7D95;
+}
+
+.award_main_head {
+    padding: 23px;
+}
+
+
+/* festive calendar section */
+
+.festive_calender_section {
+    margin-top: 30px;
+}
+
+.festive_heading h4 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    color: #5F7D95;
+}
+
+.festive_heading p {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0.13em;
+    color: #5F7D95;
+}
+
+.top-right {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    padding: 2px 18px;
+    background: #5861A2;
+    font-family: monospace;
+}
+
+.top-right span {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    color: #FFFFFF;
+}
+
+.top-right p {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 9px;
+    line-height: 15px;
+    color: #FFFFFF;
+}
+
+.calender-col-item {
+    margin-top: 20px
+}
+
+.img__img {
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.calender-col-item:hover .fest-overlay {
+    opacity: 0.5;
+}
+
+.fest-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #000;
+}
+
+.calender-col-item:hover .middle {
+    opacity: 1;
+}
+
+.calender-col-item:hover .totalCards {
+    opacity: 1;
+}
+
+.calender-col-item:hover .icon-onhover {
+    opacity: 1;
+}
+
+.totalCards {
+    font-style: normal;
+    font-weight: 900;
+    font-size: 15px;
+    line-height: 26px;
+    color: #fff;
+}
+
+.choose-card {
+    font-size: 12px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.text {
+    background-color: #7B86D6;
+    color: white;
+    border-radius: 20px;
+    font-size: 16px;
+    padding: 10px 32px;
+    cursor: pointer;
+}
+
+.text a {
+    color: white;
+    text-decoration: none;
+}
+
+.upcoming_festival_cards_section {
+    background: #EFF0F9;
+}
+
+.upcoming_fest_head {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.upcoming_fest_head h4 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    color: #5861A2;
+}
+
+.upcoming_fest_head p {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0.13em;
+    color: #5861A2;
+}
+
+.cstmbtn {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    color: #5861A2;
+}
+
+.infomiddle {
+    padding: 0px 10px 10px 10px;
+}
+
+.info-right {
+    float: right;
+}
+
+.infomiddle h2 {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    color: #374957;
+    font-family: sans-serif;
+}
+
+.festupcominicon {
+    background: url("../home-images/festupcominicon.html") repeat 0 0;
+}
+
+span.icon-onhover img {
+    margin-top: 10px;
+    width: 26px;
+}
+
+span.icon-onhover {
+    background: #fff;
+    width: 45px;
+    height: 45px;
+    display: inline-block;
+    border-radius: 50px;
+}
+
+.photo-fest-cal {
+    position: relative;
+    max-height: 350px;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+
+/* replcae this css in home.css*/
+
+.btn_area {
+    text-align: center;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-top-color: #ccc;
+    border-bottom-color: #CCC;
+    margin-bottom: 0px;
+    padding: 18px;
+}
+
+
+/* replcae this css in home.css*/
+
+.festive_calender_section {
+    background-color: #EFF0F9;
+}
+
+.festive-background {
+    padding: 50px 0 80px 0px;
+    background: url(../home-images/left-background.svg) 0px 0px no-repeat, url(../home-images/right-background.svg) 100% 0px no-repeat;
+}
+
+
+/*.fev-collection div.col-md-3 {
+    padding-right: 0;
+}*/
+
+.fev-collection {
+    padding: 0px 0px 30px 0px;
+}
+
+.photo {
+    max-height: 240px;
+    overflow: hidden;
+}
+
+.info a {
+    text-decoration: none;
+}
+
+.btn_area:hover {
+    background: #5861A2;
+}
+
+.btn_area:hover .cstmbtn {
+    color: #fff;
+}
+
+span.info-left a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.photo-1 {
+    max-height: 240px;
+    overflow: hidden;
+}
+
+.photo-11 img:hover {
+    transition: .5s all;
+    transform: scale(1.5);
+}
+
+.photo-1 img:hover {
+    transition: .5s all;
+    transform: scale(1.5);
+}
+
+.photo-11 {
+    max-height: 300px;
+    overflow: hidden;
+    min-height: 300px;
+}
+
+.photo-11 img {
+    width: 100%;
+}
+
+#jssor_1 {
+    position: relative;
+    margin: 0 auto;
+    left: 0px;
+    height: 510px;
+    overflow: hidden;
+}
+
+#slider-div {
+    cursor: default;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    height: 510px;
+    overflow: hidden;
+}
+
+.nav-fixed {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background: #fff;
+    z-index: 10;
+    box-shadow: 0px 2px 4px 1px #777;
+}
+
+.nav-fixed ul#nav {
+    line-height: 95px !important;
+    height: 94px;
+}
+
+span.info-right.shareModal-pointer {
+    cursor: pointer;
+}
+
+@media screen and (max-width:580px) {
+    .header_top_right ul li {
+        padding: 0px 4px 0px 10px;
+    }
+    .header_top_right ul li i {
+        font-size: 15px;
+    }
+    .fev-collection div.col-md-3 {
+        padding-right: 15px;
+    }
+}
+
+@media screen and (max-width:370px) {
+    .send-step .col-md-10 h1 {
+        font-size: 12px;
+    }
+    .send-step .col-md-2 img {
+        width: 35px;
+    }
+    .header_top_right ul li {
+        padding: 0px 0px 0px 8px;
+    }
+    span.btn_box_img {
+        width: 65px;
+        height: 65px;
+    }
+    span.btn_box_img figure img {
+        margin-top: 16px;
+        width: 34px;
+    }
+    .steps {
+        font-size: 10px;
+    }
+    .send-step .col-md-10 p {
+        font-size: 10px;
+    }
+}
+
+.upload_gif_section {
+    background-color: #e3e4f2;
+}
+
+.send_greeting_section {
+    padding: 30px 0px 80px 0px;
+}
+
+.viewmorebtn {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 61px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 15px;
+    padding: 10px 25px 10px 25px;
+    color: #5F7D95;
+    outline: none;
+}
+
+.viewmore a {
+    text-decoration: none;
+}
+
+.social_login .whatsapp .icon {
+    background: #008000c4;
+}
+
+a.initialism.readinstruct {
+    font-size: 12px;
+    color: red;
+    font-weight: 600;
+    text-transform: none;
+    text-decoration: none;
+    padding: 5px 0px 0px 0px;
+}
+
+a.left-icon {
+    left: 50px;
+    background: none !important;
+    border: 0px;
+}
+
+a.right-icon {
+    right: 50px !important;
+    background: none !important;
+    border: 0px;
+}
+
+.carousel-control span.fa {
+    font-size: 85px;
+}
+
+
+/*
+     FILE ARCHIVED ON 11:10:27 Oct 07, 2021 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 09:17:38 Oct 21, 2021.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+
+
+/*
+playback timings (ms):
+  captures_list: 132.598
+  exclusion.robots: 0.116
+  exclusion.robots.policy: 0.107
+  RedisCDXSource: 1.998
+  esindex: 0.009
+  LoadShardBlock: 111.033 (3)
+  PetaboxLoader3.datanode: 122.392 (4)
+  CDXLines.iter: 17.009 (3)
+  PetaboxLoader3.resolve: 174.733 (2)
+  load_resource: 242.434
+*/
