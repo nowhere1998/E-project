@@ -1,22 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\aptech\\HK3\\E-project\\",
+  "WorkspaceRootPath": "D:\\Bkap\\SEM3\\E_Project_Sem3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|d:\\aptech\\hk3\\e-project\\e_project\\wwwroot\\user\\assets\\home-images\\my-flag.jpg||{58961B49-13E0-48C0-9258-13CBC4D40279}",
-      "RelativeMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|solutionrelative:e_project\\wwwroot\\user\\assets\\home-images\\my-flag.jpg||{58961B49-13E0-48C0-9258-13CBC4D40279}"
+      "AbsoluteMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|d:\\bkap\\sem3\\e_project_sem3\\e_project\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|solutionrelative:e_project\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|d:\\aptech\\hk3\\e-project\\e_project\\wwwroot\\user\\assets\\home-images\\vietnam.png||{58961B49-13E0-48C0-9258-13CBC4D40279}",
-      "RelativeMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|solutionrelative:e_project\\wwwroot\\user\\assets\\home-images\\vietnam.png||{58961B49-13E0-48C0-9258-13CBC4D40279}"
+      "AbsoluteMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|d:\\bkap\\sem3\\e_project_sem3\\e_project\\models\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|solutionrelative:e_project\\models\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|d:\\aptech\\hk3\\e-project\\e_project\\views\\shared\\_layouthome.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|solutionrelative:e_project\\views\\shared\\_layouthome.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|d:\\bkap\\sem3\\e_project_sem3\\e_project\\models\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|solutionrelative:e_project\\models\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|d:\\aptech\\hk3\\e-project\\e_project\\wwwroot\\user\\assets\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|solutionrelative:e_project\\wwwroot\\user\\assets\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|d:\\bkap\\sem3\\e_project_sem3\\e_project\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|solutionrelative:e_project\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|d:\\bkap\\sem3\\e_project_sem3\\e_project\\models\\subcribe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9201CE9F-9057-4D37-A5D2-8FE965134D88}|E_project\\E_project.csproj|solutionrelative:e_project\\models\\subcribe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,56 +30,67 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "my-flag.jpg",
-              "DocumentMoniker": "D:\\aptech\\HK3\\E-project\\E_project\\wwwroot\\user\\assets\\home-images\\my-flag.jpg",
-              "RelativeDocumentMoniker": "E_project\\wwwroot\\user\\assets\\home-images\\my-flag.jpg",
-              "ToolTip": "D:\\aptech\\HK3\\E-project\\E_project\\wwwroot\\user\\assets\\home-images\\my-flag.jpg",
-              "RelativeToolTip": "E_project\\wwwroot\\user\\assets\\home-images\\my-flag.jpg",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2024-12-13T06:41:34.002Z",
-              "EditorCaption": ""
+              "DocumentIndex": 2,
+              "Title": "Transaction.cs",
+              "DocumentMoniker": "D:\\Bkap\\SEM3\\E_Project_Sem3\\E_project\\Models\\Transaction.cs",
+              "RelativeDocumentMoniker": "E_project\\Models\\Transaction.cs",
+              "ToolTip": "D:\\Bkap\\SEM3\\E_Project_Sem3\\E_project\\Models\\Transaction.cs",
+              "RelativeToolTip": "E_project\\Models\\Transaction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T09:06:45.38Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "vietnam.png",
-              "DocumentMoniker": "D:\\aptech\\HK3\\E-project\\E_project\\wwwroot\\user\\assets\\home-images\\vietnam.png",
-              "RelativeDocumentMoniker": "E_project\\wwwroot\\user\\assets\\home-images\\vietnam.png",
-              "ToolTip": "D:\\aptech\\HK3\\E-project\\E_project\\wwwroot\\user\\assets\\home-images\\vietnam.png*",
-              "RelativeToolTip": "E_project\\wwwroot\\user\\assets\\home-images\\vietnam.png*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2024-12-13T06:41:19.051Z",
-              "EditorCaption": ""
+              "DocumentIndex": 4,
+              "Title": "Subcribe.cs",
+              "DocumentMoniker": "D:\\Bkap\\SEM3\\E_Project_Sem3\\E_project\\Models\\Subcribe.cs",
+              "RelativeDocumentMoniker": "E_project\\Models\\Subcribe.cs",
+              "ToolTip": "D:\\Bkap\\SEM3\\E_Project_Sem3\\E_project\\Models\\Subcribe.cs",
+              "RelativeToolTip": "E_project\\Models\\Subcribe.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T09:06:42.933Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "style.css",
-              "DocumentMoniker": "D:\\aptech\\HK3\\E-project\\E_project\\wwwroot\\user\\assets\\css\\style.css",
-              "RelativeDocumentMoniker": "E_project\\wwwroot\\user\\assets\\css\\style.css",
-              "ToolTip": "D:\\aptech\\HK3\\E-project\\E_project\\wwwroot\\user\\assets\\css\\style.css",
-              "RelativeToolTip": "E_project\\wwwroot\\user\\assets\\css\\style.css",
-              "ViewState": "AgIAABEAAAAAAAAAAAAuwCwAAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-12-13T06:33:42.798Z",
-              "EditorCaption": ""
+              "Title": "Category.cs",
+              "DocumentMoniker": "D:\\Bkap\\SEM3\\E_Project_Sem3\\E_project\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "E_project\\Models\\Category.cs",
+              "ToolTip": "D:\\Bkap\\SEM3\\E_Project_Sem3\\E_project\\Models\\Category.cs",
+              "RelativeToolTip": "E_project\\Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T09:01:34.253Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_LayoutHome.cshtml",
-              "DocumentMoniker": "D:\\aptech\\HK3\\E-project\\E_project\\Views\\Shared\\_LayoutHome.cshtml",
-              "RelativeDocumentMoniker": "E_project\\Views\\Shared\\_LayoutHome.cshtml",
-              "ToolTip": "D:\\aptech\\HK3\\E-project\\E_project\\Views\\Shared\\_LayoutHome.cshtml",
-              "RelativeToolTip": "E_project\\Views\\Shared\\_LayoutHome.cshtml",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAAAD0AAABWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-12T06:59:45.064Z",
+              "DocumentIndex": 1,
+              "Title": "Card.cs",
+              "DocumentMoniker": "D:\\Bkap\\SEM3\\E_Project_Sem3\\E_project\\Models\\Card.cs",
+              "RelativeDocumentMoniker": "E_project\\Models\\Card.cs",
+              "ToolTip": "D:\\Bkap\\SEM3\\E_Project_Sem3\\E_project\\Models\\Card.cs",
+              "RelativeToolTip": "E_project\\Models\\Card.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T09:00:14.039Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Account.cs",
+              "DocumentMoniker": "D:\\Bkap\\SEM3\\E_Project_Sem3\\E_project\\Models\\Account.cs",
+              "RelativeDocumentMoniker": "E_project\\Models\\Account.cs",
+              "ToolTip": "D:\\Bkap\\SEM3\\E_Project_Sem3\\E_project\\Models\\Account.cs",
+              "RelativeToolTip": "E_project\\Models\\Account.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T09:00:09.622Z",
               "EditorCaption": ""
             }
           ]
