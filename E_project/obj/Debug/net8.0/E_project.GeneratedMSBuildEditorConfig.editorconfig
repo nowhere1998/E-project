@@ -17,47 +17,47 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = E_project
 build_property.RootNamespace = E_project
-build_property.ProjectDir = D:\aptech\HK3\E-project\E_project\
+build_property.ProjectDir = D:\Bkap\SEM3\E_Project_Sem3\E_project\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\aptech\HK3\E-project\E_project
+build_property.MSBuildProjectDirectory = D:\Bkap\SEM3\E_Project_Sem3\E_project
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/aptech/HK3/E-project/E_project/Views/Home/Cards.cshtml]
+[D:/Bkap/SEM3/E_Project_Sem3/E_project/Views/Home/Cards.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDYXJkcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/aptech/HK3/E-project/E_project/Views/Home/Index.cshtml]
+[D:/Bkap/SEM3/E_Project_Sem3/E_project/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/aptech/HK3/E-project/E_project/Views/Home/Privacy.cshtml]
+[D:/Bkap/SEM3/E_Project_Sem3/E_project/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/aptech/HK3/E-project/E_project/Views/Shared/Error.cshtml]
+[D:/Bkap/SEM3/E_Project_Sem3/E_project/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/aptech/HK3/E-project/E_project/Views/Shared/_LayoutHome.cshtml]
+[D:/Bkap/SEM3/E_Project_Sem3/E_project/Views/Shared/_LayoutHome.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRIb21lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/aptech/HK3/E-project/E_project/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Bkap/SEM3/E_Project_Sem3/E_project/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/aptech/HK3/E-project/E_project/Views/_ViewImports.cshtml]
+[D:/Bkap/SEM3/E_Project_Sem3/E_project/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/aptech/HK3/E-project/E_project/Views/_ViewStart.cshtml]
+[D:/Bkap/SEM3/E_Project_Sem3/E_project/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/aptech/HK3/E-project/E_project/Views/Shared/_Layout.cshtml]
+[D:/Bkap/SEM3/E_Project_Sem3/E_project/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-9dcba605p8
