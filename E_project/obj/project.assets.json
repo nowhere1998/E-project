@@ -7662,11 +7662,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\aptech\\HK3\\E-project\\E_project\\E_project.csproj",
+      "projectUniqueName": "D:\\Bkap\\SEM3\\E_Project_Sem3\\E_project\\E_project.csproj",
       "projectName": "E_project",
-      "projectPath": "D:\\aptech\\HK3\\E-project\\E_project\\E_project.csproj",
+      "projectPath": "D:\\Bkap\\SEM3\\E_Project_Sem3\\E_project\\E_project.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\aptech\\HK3\\E-project\\E_project\\obj\\",
+      "outputPath": "D:\\Bkap\\SEM3\\E_Project_Sem3\\E_project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
