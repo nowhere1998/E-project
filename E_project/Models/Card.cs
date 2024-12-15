@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_project.Models
 {
+    [Table("Cards")]
     public class Card
     {
         [Key]
@@ -25,6 +26,6 @@ namespace E_project.Models
         [ForeignKey("CategoryId")]
         public Category? Category { get; set; }
 
-        public ICollection<TransactionDetail> TransactionDetails { get; set; } = new List<TransactionDetail>;
+        public ICollection<TransactionDetail> TransactionDetails { get; set; } = new List<TransactionDetail>();
     }
 }

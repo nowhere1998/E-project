@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_project.Models
 {
+    [Table("Categories")]
     public class Category
     {
         [Key]

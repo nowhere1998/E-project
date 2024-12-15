@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace E_project.Models
 {
+    [Table("Feedbacks")]
     public class Feedback
     {
         [Key]
