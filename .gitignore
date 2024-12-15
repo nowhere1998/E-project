@@ -1,3 +1,3 @@
-﻿# Bỏ qua các thư mục và tệp hệ thống
-.vs/
-
+﻿.vs/
+obj/
+bin/
