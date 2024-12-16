@@ -27,9 +27,12 @@ namespace E_project.Models
         [DataType(DataType.Password)]
         [Required]
         public string Password { get; set; } = null!;
+        [StringLength(300, ErrorMessage = "Picture URL cannot exceed 300 characters.")]
+        public string? Image { get; set; }
         public double Balance { get; set; } = 0;
         public DateTime RenewalDate { get; set; }
         public string Role { get; set; }
         public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
+        public ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
     }
 }

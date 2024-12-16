@@ -14,12 +14,14 @@ namespace E_project.Models
         public string? Image { get; set; }
         public DateTime CreateAt { get; set; }
         public int Success { get; set; }
+        [ForeignKey("AccountId")]
         public int AccountId { get; set; }
-        [ForeignKey("CategoryId")]
         public Account? Account { get; set; }
-        public int CardId { get; set; }
         [ForeignKey("CardId")]
+        public int CardId { get; set; }
         public Card? Card { get; set; }
+
+        public ICollection<TransactionDetail> transactionDetails { get; set; } = new List<TransactionDetail>();
 
     }
 }

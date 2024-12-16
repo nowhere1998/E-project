@@ -12,8 +12,8 @@ namespace E_project.Models
         [Required]
         public string? Content { get; set; }
         public DateTime CreateAt { get; set; }
+        [ForeignKey("AccountId")]
         public int AccountId { get; set; }
-        [ForeignKey("CategoryId")]
         public Account? Account { get; set; }
     }
 }
