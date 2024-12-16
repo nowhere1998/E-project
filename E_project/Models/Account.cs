@@ -31,5 +31,7 @@ namespace E_project.Models
         public DateTime RenewalDate { get; set; }
         public string Role { get; set; }
         public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
+        public ICollection<Subcribe> Subcribes { get; set; } = new List<Subcribe>();
+
     }
 }
