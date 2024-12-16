@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,7 +14,8 @@ namespace E_project.Models
         [StringLength(250, ErrorMessage = "Email cannot exceed 250 characters.")]
         [Required]
         public string? Email { get; set; }
-        public string? Content { get; set; }
+        [Column(TypeName = "ntext")]
+        public string? Content { get; set; } = string.Empty;
         public int AccountId { get; set; }
         public Account? Account { get; set; }
     }
