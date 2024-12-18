@@ -21,11 +21,10 @@ namespace E_project.Models
         public string? Image { get; set; }
         public DateTime CreateAt { get; set; }
         public string? Description { get; set; }
-        public int CategoryId { get; set; }
-
         [ForeignKey("CategoryId")]
+        public int CategoryId { get; set; }
         public Category? Category { get; set; }
 
-        public ICollection<TransactionDetail> TransactionDetails { get; set; } = new List<TransactionDetail>();
+        public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
     }
 }

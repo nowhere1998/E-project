@@ -15,6 +15,7 @@ namespace E_project.Models
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<TransactionDetail> TransactionDetails { get; set; }
+        public DbSet<Subcribe> Subcribes { get; set; } = default!;
 
     }
 }
