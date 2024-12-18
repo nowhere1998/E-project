@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using E_project.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using E_project.Models;
 
 namespace E_project.Areas.Admin.Controllers
 {
@@ -46,6 +42,7 @@ namespace E_project.Areas.Admin.Controllers
         // GET: Admin/Categories/Create
         public IActionResult Create()
         {
+            ViewBag.parentCategories = ParentCategories();
             return View();
         }
 
@@ -152,6 +149,15 @@ namespace E_project.Areas.Admin.Controllers
         private bool CategoryExists(int id)
         {
             return _context.Categories.Any(e => e.CategoryId == id);
+        }
+
+        private static List<SelectListItem> ParentCategories()
+        {
+            return new List<SelectListItem>
+                            {
+                            new SelectListItem { Value = "Celebration", Text = "Celebration" },
+                            new SelectListItem { Value = "Festivals", Text = "Festivals"}
+                            };
         }
     }
 }
