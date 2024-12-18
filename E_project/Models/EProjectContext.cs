@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using E_project.Models;
 
 namespace E_project.Models
 {
@@ -16,7 +15,7 @@ namespace E_project.Models
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<TransactionDetail> TransactionDetails { get; set; }
-        public DbSet<E_project.Models.Subcribe> Subcribe { get; set; } = default!;
+        public DbSet<Subcribe> Subcribes { get; set; } = default!;
 
     }
 }

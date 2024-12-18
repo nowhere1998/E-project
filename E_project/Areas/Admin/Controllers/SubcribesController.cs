@@ -22,7 +22,7 @@ namespace E_project.Areas.Admin.Controllers
         // GET: Admin/Subcribes
         public async Task<IActionResult> Index()
         {
-            var eProjectContext = _context.Subcribe.Include(s => s.Account);
+            var eProjectContext = _context.Subcribes.Include(s => s.Account);
             return View(await eProjectContext.ToListAsync());
         }
 
@@ -34,7 +34,7 @@ namespace E_project.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var subcribe = await _context.Subcribe
+            var subcribe = await _context.Subcribes
                 .Include(s => s.Account)
                 .FirstOrDefaultAsync(m => m.SubcribeId == id);
             if (subcribe == null)
@@ -77,7 +77,7 @@ namespace E_project.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var subcribe = await _context.Subcribe.FindAsync(id);
+            var subcribe = await _context.Subcribes.FindAsync(id);
             if (subcribe == null)
             {
                 return NotFound();
@@ -130,7 +130,7 @@ namespace E_project.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var subcribe = await _context.Subcribe
+            var subcribe = await _context.Subcribes
                 .Include(s => s.Account)
                 .FirstOrDefaultAsync(m => m.SubcribeId == id);
             if (subcribe == null)
@@ -146,10 +146,10 @@ namespace E_project.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var subcribe = await _context.Subcribe.FindAsync(id);
+            var subcribe = await _context.Subcribes.FindAsync(id);
             if (subcribe != null)
             {
-                _context.Subcribe.Remove(subcribe);
+                _context.Subcribes.Remove(subcribe);
             }
 
             await _context.SaveChangesAsync();
@@ -158,7 +158,7 @@ namespace E_project.Areas.Admin.Controllers
 
         private bool SubcribeExists(int id)
         {
-            return _context.Subcribe.Any(e => e.SubcribeId == id);
+            return _context.Subcribes.Any(e => e.SubcribeId == id);
         }
     }
 }
