@@ -1,4 +1,5 @@
 ﻿using E_project.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace E_project.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class CategoriesController : Controller
     {
         private readonly EProjectContext _context;
@@ -43,6 +45,7 @@ namespace E_project.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.parentCategories = ParentCategories();
+            ViewBag.status = Status();
             return View();
         }
 
@@ -53,6 +56,8 @@ namespace E_project.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CategoryId,CategoryName,Status,ParentCategory")] Category category)
         {
+            ViewBag.parentCategories = ParentCategories();
+            ViewBag.status = Status();
             if (ModelState.IsValid)
             {
                 _context.Add(category);
@@ -65,6 +70,8 @@ namespace E_project.Areas.Admin.Controllers
         // GET: Admin/Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.parentCategories = ParentCategories();
+            ViewBag.status = Status();
             if (id == null)
             {
                 return NotFound();
@@ -85,6 +92,8 @@ namespace E_project.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CategoryId,CategoryName,Status,ParentCategory")] Category category)
         {
+            ViewBag.parentCategories = ParentCategories();
+            ViewBag.status = Status();
             if (id != category.CategoryId)
             {
                 return NotFound();
@@ -156,7 +165,19 @@ namespace E_project.Areas.Admin.Controllers
             return new List<SelectListItem>
                             {
                             new SelectListItem { Value = "Celebration", Text = "Celebration" },
-                            new SelectListItem { Value = "Festivals", Text = "Festivals"}
+                            new SelectListItem { Value = "Festivals", Text = "Festivals"},
+                            new SelectListItem { Value = "Glimpses of India", Text = "Glimpses of India"},
+                            new SelectListItem { Value = "Heritage", Text = "Heritage"},
+                            new SelectListItem { Value = "Ministry", Text = "Ministry"},
+                            new SelectListItem { Value = "MISCELLANEOUS", Text = "MISCELLANEOUS"}
+                            };
+        }
+        private static List<SelectListItem> Status()
+        {
+            return new List<SelectListItem>
+                            {
+                            new SelectListItem { Value = "true", Text = "Enable" },
+                            new SelectListItem { Value = "false", Text = "Disable"}
                             };
         }
     }

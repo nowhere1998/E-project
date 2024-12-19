@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using E_project.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using E_project.Models;
 
 namespace E_project.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class CardsController : Controller
     {
         private readonly EProjectContext _context;
@@ -22,8 +20,12 @@ namespace E_project.Areas.Admin.Controllers
         // GET: Admin/Cards
         public async Task<IActionResult> Index()
         {
-            var eProjectContext = _context.Cards.Include(c => c.Category);
-            return View(await eProjectContext.ToListAsync());
+            var cards = await _context.Cards.Include(c => c.Category).ToListAsync();
+            foreach (var card in cards)
+            {
+                card.Image = "/user/assets/images/card/" + card.Image;
+            }
+            return View(cards);
         }
 
         // GET: Admin/Cards/Details/5
@@ -49,6 +51,7 @@ namespace E_project.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName");
+            ViewBag.status = Status();
             return View();
         }
 
@@ -57,15 +60,35 @@ namespace E_project.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CardId,CardName,Status,Image,CreateAt,Description,CategoryId")] Card card)
+        public async Task<IActionResult> Create([Bind("CardId,CardName,Status,Image,CreateAt,Description,CategoryId")] Card card, IFormFile? photo)
         {
+
+            var cards = _context.Cards.ToList();
+            if (cards.Any(c => c.CardName.ToLower().Equals(card.CardName.ToLower())))
+            {
+                ViewBag.errorName = "Card Name is valid";
+                ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", card.CategoryId);
+                ViewBag.status = Status();
+                return View(card);
+            }
             if (ModelState.IsValid)
             {
+                if (photo != null && photo.Length >= 0)
+                {
+                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/user/assets/images/card/", photo.FileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        photo.CopyTo(stream);
+                    }
+                    card.Image = /*"/image/product/" */photo.FileName;
+                }
+                card.CreateAt = DateTime.Now;
                 _context.Add(card);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", card.CategoryId);
+            ViewBag.status = Status();
             return View(card);
         }
 
@@ -82,6 +105,7 @@ namespace E_project.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            ViewBag.status = Status();
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", card.CategoryId);
             return View(card);
         }
@@ -91,13 +115,28 @@ namespace E_project.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CardId,CardName,Status,Image,CreateAt,Description,CategoryId")] Card card)
+        public async Task<IActionResult> Edit(int id, [Bind("CardId,CardName,Status,Image,CreateAt,Description,CategoryId")] Card card, IFormFile? photo)
         {
             if (id != card.CardId)
             {
                 return NotFound();
             }
-
+            if (_context.Cards.AsNoTracking().FirstOrDefault(c => c.CardName.ToLower().Equals(card.CardName.ToLower()) && c.CardId != card.CardId) != null)
+            {
+                ViewBag.errorName = "Card Name is valid";
+                ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", card.CategoryId);
+                ViewBag.status = Status();
+                return View(card);
+            }
+            if (photo != null && photo.Length >= 0)
+            {
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/user/assets/images/card/", photo.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    photo.CopyTo(stream);
+                }
+                card.Image = /*"/image/product/" */photo.FileName;
+            }
             if (ModelState.IsValid)
             {
                 try
@@ -118,6 +157,7 @@ namespace E_project.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.status = Status();
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", card.CategoryId);
             return View(card);
         }
@@ -159,6 +199,14 @@ namespace E_project.Areas.Admin.Controllers
         private bool CardExists(int id)
         {
             return _context.Cards.Any(e => e.CardId == id);
+        }
+        private static List<SelectListItem> Status()
+        {
+            return new List<SelectListItem>
+                            {
+                            new SelectListItem { Value = "true", Text = "Enable" },
+                            new SelectListItem { Value = "false", Text = "Disable"}
+                            };
         }
     }
 }

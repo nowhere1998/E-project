@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using E_project.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using E_project.Models;
 
 namespace E_project.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class FeedbacksController : Controller
     {
         private readonly EProjectContext _context;
