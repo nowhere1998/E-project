@@ -16,7 +16,7 @@
                             <img src="/admin/dist/img/avartar.jpg" class="img-circle elevation-2" alt="User Image">
                         </div> *@
                         <div class="info">
-                            <a href="#" class="d-block">Alexander Pierce</a>
+                            <a href="#" class="d-block">@User.Claims.Skip(0).FirstOrDefault().Value</a>
                         </div>
                     </div>
 

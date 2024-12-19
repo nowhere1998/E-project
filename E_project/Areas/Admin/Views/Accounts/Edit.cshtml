@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    bool allowEdit = ViewBag.allowEdit;
 }
 
 <h1>Edit</h1>
@@ -14,6 +15,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="AccountId" />
+            <input type="hidden" name="allowEdit" value="@allowEdit" />
             <div class="form-group">
                 <label asp-for="AccountName" class="control-label"></label>
                 <input asp-for="AccountName" class="form-control" />
@@ -22,18 +24,22 @@
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <span asp-validation-for="Email" class="text-danger">@ViewBag.errorEmail</span>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
+            @if (allowEdit)
+            {
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            }
+            @* 
             <div class="form-group">
                 <label asp-for="Balance" class="control-label"></label>
                 <input asp-for="Balance" class="form-control" />
                 <span asp-validation-for="Balance" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
                 <label asp-for="RenewalDate" class="control-label"></label>
                 <input asp-for="RenewalDate" class="form-control" />
@@ -41,7 +47,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Role" class="control-label"></label>
-                <input asp-for="Role" class="form-control" />
+                <select asp-for="Role" class="form-control" asp-items="ViewBag.role"></select>
                 <span asp-validation-for="Role" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using E_project.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using E_project.Models;
 
 namespace E_project.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class AccountsController : Controller
     {
         private readonly EProjectContext _context;
@@ -46,6 +44,7 @@ namespace E_project.Areas.Admin.Controllers
         // GET: Admin/Accounts/Create
         public IActionResult Create()
         {
+            ViewBag.role = Role();
             return View();
         }
 
@@ -56,12 +55,19 @@ namespace E_project.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AccountId,AccountName,Email,Password,Balance,RenewalDate,Role")] Account account)
         {
+            if (_context.Accounts.AsNoTracking().FirstOrDefault(a => a.Email.Equals(account.Email)) != null)
+            {
+                ViewBag.errorEmail = "This email is valid";
+                ViewBag.role = Role();
+                return View(account);
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(account);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.role = Role();
             return View(account);
         }
 
@@ -72,12 +78,18 @@ namespace E_project.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
             var account = await _context.Accounts.FindAsync(id);
             if (account == null)
             {
                 return NotFound();
             }
+            var allowEdit = false;
+            if (account.Email.Equals(User.Claims.Skip(1).FirstOrDefault().Value))
+            {
+                allowEdit = true;
+            }
+            ViewBag.allowEdit = allowEdit;
+            ViewBag.role = Role();
             return View(account);
         }
 
@@ -92,7 +104,12 @@ namespace E_project.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
+            if (_context.Accounts.AsNoTracking().FirstOrDefault(a => a.Email.Equals(account.Email) && a.AccountId != account.AccountId) != null)
+            {
+                ViewBag.errorEmail = "This email is valid";
+                ViewBag.role = Role();
+                return View(account);
+            }
             if (ModelState.IsValid)
             {
                 try
@@ -113,6 +130,7 @@ namespace E_project.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.role = Role();
             return View(account);
         }
 
@@ -152,6 +170,14 @@ namespace E_project.Areas.Admin.Controllers
         private bool AccountExists(int id)
         {
             return _context.Accounts.Any(e => e.AccountId == id);
+        }
+        private static List<SelectListItem> Role()
+        {
+            return new List<SelectListItem>
+                            {
+                            new SelectListItem { Value = "Admin", Text = "Admin" },
+                            new SelectListItem { Value = "User", Text = "User"}
+                            };
         }
     }
 }

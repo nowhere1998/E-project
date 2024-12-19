@@ -16,10 +16,13 @@ builder.Services.AddSession(option =>
     option.Cookie.HttpOnly = true;
     option.IdleTimeout = TimeSpan.FromHours(1);
 });
-
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
 builder.Services.AddAuthentication("EProjectSecurityScheme").AddCookie("EProjectSecurityScheme", options =>
 {
-    //options.AccessDeniedPath = new PathString("/admin");
+    options.AccessDeniedPath = new PathString("/Admin/");
     options.Cookie = new CookieBuilder
     {
         HttpOnly = true,
@@ -28,8 +31,12 @@ builder.Services.AddAuthentication("EProjectSecurityScheme").AddCookie("EProject
         SameSite = SameSiteMode.Lax,
         SecurePolicy = CookieSecurePolicy.SameAsRequest
     };
-    options.LoginPath = new PathString("/admin/login");
-    options.ReturnUrlParameter = "RequestPath";
+    options.Events = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents
+    {
+
+    };
+    options.LoginPath = new PathString("/Admin/Home/Login");
+    options.ReturnUrlParameter = "redirectPath";
     options.SlidingExpiration = true;
 }
 );
