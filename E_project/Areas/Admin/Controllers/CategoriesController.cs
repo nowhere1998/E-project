@@ -165,7 +165,11 @@ namespace E_project.Areas.Admin.Controllers
             return new List<SelectListItem>
                             {
                             new SelectListItem { Value = "Celebration", Text = "Celebration" },
-                            new SelectListItem { Value = "Festivals", Text = "Festivals"}
+                            new SelectListItem { Value = "Festivals", Text = "Festivals"},
+                            new SelectListItem { Value = "Glimpses of India", Text = "Glimpses of India"},
+                            new SelectListItem { Value = "Heritage", Text = "Heritage"},
+                            new SelectListItem { Value = "Ministry", Text = "Ministry"},
+                            new SelectListItem { Value = "MISCELLANEOUS", Text = "MISCELLANEOUS"}
                             };
         }
         private static List<SelectListItem> Status()
