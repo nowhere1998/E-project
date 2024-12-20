@@ -1,4 +1,5 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 <!DOCTYPE html>
 <html lang="en-US">
 
@@ -59,16 +60,16 @@
                 <div class="header_top_area">
                     <div class="container">
                         <div class="header_top_left">
-                            <a href="#" title="Government of Vietnam" target="_blank" style="background-image:url(/user/assets/home-images/vietnam.png);"><span class="govt">GOVERNMENT OF VIETNAM</span></a>
+                            <a href="#" title="Government of Vietnam" target="_blank"><span class="govt">GOVERNMENT OF VIETNAM</span></a>
                         </div>
                         <div class="header_top_right">
                             <ul>
-                                <li class="twitter"><a href="https://twitter.com/EGreetingsIndia" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                <li class="facebook"><a href="https://www.facebook.com/egreetingsindia/" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                <li class="pdf"><a href="/user/assets/manuals/eGreetings_User_Manual.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a></li>
-                                <li class="wheel"><a href="/user/assets/manuals/eGreetings_User_Manual.pdf" target="_blank"><i class="fa fa-wheelchair"></i></a></li>
-                                <li class="login"><a href="login.html"><i class="fa fa-sign-in"></i>&ensp;Login</a></li>
-                                <li class="login"><a href="https://auth.mygov.in/" target="_blank"><i class="fa fa-user-o"></i>&ensp;Register</a></li>
+                                <li class="twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                <li class="facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <li class="pdf"><a href="#" target="_blank"><i class="fa fa-file-pdf-o"></i></a></li>
+                                <li class="wheel"><a href="#" target="_blank"><i class="fa fa-wheelchair"></i></a></li>
+                                <li class="login"><a href="/home/login"><i class="fa fa-sign-in"></i>&ensp;Login</a></li>
+                                <li class="login"><a href="/home/register" target="_blank"><i class="fa fa-user-o"></i>&ensp;Register</a></li>
                             </ul>
                         </div>
                     </div>
@@ -482,7 +483,7 @@
                                                         <div class="infomiddle">
                                                             <h2>sdd</h2>
                                                             <span class="info-left">
-                                                                <a href="ecustomize-sdd-457.html"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit this card</a>
+                                                                <a href="/edit-card"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit this card</a>
                                                             </span>
                                                             <span class="info-right shareModal-pointer" data-toggle="modal" data-target="#shareModal" onclick="setCardId('457','sdd')"><img src="/user/assets/home-images/share1.png"></span>
                                                         </div>
