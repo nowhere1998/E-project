@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
 <html lang="en-US">
 
 <!-- Mirrored from egreetings.gov.in/cards-Ambedkar+Jayanti-23.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Dec 2024 07:41:52 GMT -->
@@ -29,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="/user/assets/css/nav.css" />
     <link rel="stylesheet" type="text/css" href="/user/assets/css/hover-effect.css" />
     <link rel="stylesheet" type="text/css" href="/user/assets/css/slide-show.css" />
-    <link rel="stylesheet" type="text/css" href="../cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="/user/cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
     <link rel="stylesheet" type="text/css" href="/user/assets/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/user/assets/css/page.css" />
     <link rel="stylesheet" type="text/css" href="/user/assets/fonts/css/font-awesome.css" />
@@ -58,16 +60,16 @@
                 <div class="header_top_area">
                     <div class="container">
                         <div class="header_top_left">
-                            <a href="http://india.gov.in/" title="Government of India" target="_blank"><span class="govt">GOVERNMENT OF INDIA</span></a>
+                            <a href="#" title="Government of Vietname" target="_blank"><span class="govt">GOVERNMENT OF VIETNAM</span></a>
                         </div>
                         <div class="header_top_right">
                             <ul>
-                                <li class="twitter"><a href="https://twitter.com/EGreetingsIndia" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                <li class="facebook"><a href="https://www.facebook.com/egreetingsindia/" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                <li class="pdf"><a href="/user/assets/manuals/eGreetings_User_Manual.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a></li>
-                                <li class="wheel"><a href="/user/assets/manuals/eGreetings_User_Manual.pdf" target="_blank"><i class="fa fa-wheelchair"></i></a></li>
-                                <li class="login"><a href="login.html"><i class="fa fa-sign-in"></i>&ensp;Login</a></li>
-                                <li class="login"><a href="https://auth.mygov.in/" target="_blank"><i class="fa fa-user-o"></i>&ensp;Register</a></li>
+                                <li class="twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                <li class="facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <li class="pdf"><a href="#" target="_blank"><i class="fa fa-file-pdf-o"></i></a></li>
+                                <li class="wheel"><a href="#" target="_blank"><i class="fa fa-wheelchair"></i></a></li>
+                                <li class="login"><a href="/home/login"><i class="fa fa-sign-in"></i>&ensp;Login</a></li>
+                                <li class="login"><a href="/home/register" target="_blank"><i class="fa fa-user-o"></i>&ensp;Register</a></li>
                             </ul>
                         </div>
                     </div>
@@ -276,24 +278,9 @@
             <div class="clearfix"></div>
 
             <!-- Content Area Strat-->
-            <div class="content_area">
-
-
-                <div class="content_top_banner cards_bnr">
-                    <h2 align="left" class="page_title">Ambedkar Jayanti</h2>
-                </div>
-                <ul class="breadcrumb bgcol">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Celebration</a></li>
-                    <li>Ambedkar Jayanti</li>
-                </ul>
-                <div class="clearfix"></div>
-
-                @RenderBody()
-
-                <div class="clearfix"></div>
-            </div>
+            @RenderBody()
             <!-- Content Area End-->
+            <div class="clearfix"></div>
             <!-- popup window Start-->
             <div class="container">
                 <div class="modal fade modal-width" id="shareModal">
@@ -440,6 +427,7 @@
     <script src="/user/assets/js/custom_js.js" type="text/javascript"></script>
     <script src="/user/assets/js/newjs.js" type="text/javascript"></script>
     <script src="/user/assets/js/bootstrap-tagsinput.js" type="text/javascript"></script>
+    @await RenderSectionAsync("Scripts", required:false)
 </body>
 
 <!-- Mirrored from egreetings.gov.in/cards-Ambedkar+Jayanti-23.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Dec 2024 07:44:36 GMT -->

@@ -41,6 +41,9 @@ builder.Services.AddAuthentication("EProjectSecurityScheme").AddCookie("EProject
 }
 );
 
+// config email service
+builder.Services.AddScoped<EmailService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
