@@ -6,6 +6,7 @@ using System.Security.Claims;
 
 namespace E_project.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class HomeController : Controller
     {
         private readonly EProjectContext _context;
