@@ -39,7 +39,7 @@ namespace E_project.Areas.Admin.Controllers
                 ViewBag.Email = email;
                 return View();
             }
-            else if (!acc.Role.Equals("admin"))
+            else if (!acc.Role.Equals("Admin"))
             {
                 ViewBag.error = "<div class='alert alert-danger'>Not admin</div>";
                 ViewBag.Email = email;
