@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content_area">
+    <div class="content_top_banner cards_bnr">
+        <h2 align="left" class="page_title" alt="Sign &amp; SingUp | eGreetings Portal">Register</h2>
+    </div>
+
+    <ul class="breadcrumb bgcol">
+        <li><a href="index.html">Home</a></li>
+        <li>Register</li>
+    </ul>
+
+    <!-- Contect Start-->
+    <div class="page_content">
+        <div class="about_content">
+            <h2 class="text-center font-weight-bold">Register</h2>
+            <!-- Send Card Left Start-->
+            <div class="">
+                <div class="">
+                    <form>
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" class="form-control" id="fullName" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Re-enter your password">
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="termsCheck">
+                            <label class="form-check-label" for="termsCheck">I agree to the <a href="/terms" target="_blank">terms and conditions</a></label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+
+
+                </div>
+
+
+            </div>
+            <!-- Send Card Left Start-->
+        </div>
+
+        <div class="contect-us-right">
+
+            <div class="right_btn">
+
+                <button type="button" class="sign_button y_color" data-toggle="modal" data-target="#myModal">
+                    <img src="/user/assets/images/govt-mail-new.png" class="sign_line" alt="Login with Govt Mail | eGreetings Portal" /> Login with Govt Mail
+                </button>
+            </div>
+
+            <div class="right_btn">
+
+                <a href="#" target="_blank">
+                    <button type="button" class="sign_button y_blue">
+                        <img src="/user/assets/images/mygov-sign.png" class="sign_line" alt="Login with MyGov | eGreetings Portal" />Login with MyGov
+                    </button>
+                </a>
+            </div>
+
+            <div class="right_btn">
+                <a href="#" target="_blank">
+                    <button type="button" class="sign_button y_blue_d">
+                        <img src="/user/assets/images/sign-fb.png" class="sign_line" alt="Login with Facebook | eGreetings Portal" /> Login with Facebook
+                    </button>
+                </a>
+            </div>
+
+            <div class="right_btn">
+                <a class="login" href="#" target="_blank">
+                    <button type="button" class="sign_button y_blue_d_t">
+                        <img src="/user/assets/images/twi-sign.png" class="sign_line" alt="Login with Twitter | eGreetings Portal" />Login with Twitter
+                    </button>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
