@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content_area">
+    <div class="content_top_banner cards_bnr">
+        <h2 align="left" class="page_title" alt="Sign &amp; SingUp | eGreetings Portal">SignIn &amp; SignUp</h2>
+    </div>
+
+    <ul class="breadcrumb bgcol">
+        <li><a href="index.html">Home</a></li>
+        <li>Sign In</li>
+    </ul>
+
+    <!-- Contect Start-->
+    <div class="page_content">
+        <div class="about_content">
+            <h2 class="text-center font-weight-bold">Login</h2>
+            <!-- Send Card Left Start-->
+            <div class="">
+                <div class="">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <div>
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Remember password</label>
+                            </div>
+                            <a href="/forget-password" style="">Forgot your password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+
+                </div>
+                
+
+            </div>
+            <!-- Send Card Left Start-->
+        </div>
+
+        <div class="contect-us-right">
+
+            <div class="right_btn">
+
+                <button type="button" class="sign_button y_color" data-toggle="modal" data-target="#myModal">
+                    <img src="/user/assets/images/govt-mail-new.png" class="sign_line" alt="Login with Govt Mail | eGreetings Portal" /> Login with Govt Mail
+                </button>
+            </div>
+
+            <div class="right_btn">
+
+                <a href="#" target="_blank">
+                    <button type="button" class="sign_button y_blue">
+                        <img src="/user/assets/images/mygov-sign.png" class="sign_line" alt="Login with MyGov | eGreetings Portal" />Login with MyGov
+                    </button>
+                </a>
+            </div>
+
+            <div class="right_btn">
+                <a href="#" target="_blank">
+                    <button type="button" class="sign_button y_blue_d">
+                        <img src="/user/assets/images/sign-fb.png" class="sign_line" alt="Login with Facebook | eGreetings Portal" /> Login with Facebook
+                    </button>
+                </a>
+            </div>
+
+            <div class="right_btn">
+                <a class="login" href="#" target="_blank">
+                    <button type="button" class="sign_button y_blue_d_t">
+                        <img src="/user/assets/images/twi-sign.png" class="sign_line" alt="Login with Twitter | eGreetings Portal" />Login with Twitter
+                    </button>
+                </a>
+            </div>
+
+            <div class="sign_in_Ragister_btn">
+                <a href="/home/register" target="_blank"><img src="/user/assets/images/register-here.png" alt="Register at MyGov | eGreetings Portal" /></a>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
