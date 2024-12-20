@@ -63,6 +63,7 @@ namespace E_project.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
+                account.Password = Cipher.GenerateMD5(account.Password);
                 _context.Add(account);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -83,10 +84,10 @@ namespace E_project.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            var allowEdit = false;
+            var allowEdit = 0;
             if (account.Email.Equals(User.Claims.Skip(1).FirstOrDefault().Value))
             {
-                allowEdit = true;
+                allowEdit = 1;
             }
             ViewBag.allowEdit = allowEdit;
             ViewBag.role = Role();
@@ -98,7 +99,7 @@ namespace E_project.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AccountId,AccountName,Email,Password,Balance,RenewalDate,Role")] Account account)
+        public async Task<IActionResult> Edit(int id, [Bind("AccountId,AccountName,Email,Password,Balance,RenewalDate,Role")] Account account, byte? allowEdit)
         {
             if (id != account.AccountId)
             {
@@ -107,6 +108,7 @@ namespace E_project.Areas.Admin.Controllers
             if (_context.Accounts.AsNoTracking().FirstOrDefault(a => a.Email.Equals(account.Email) && a.AccountId != account.AccountId) != null)
             {
                 ViewBag.errorEmail = "This email is valid";
+                ViewBag.allowEdit = allowEdit;
                 ViewBag.role = Role();
                 return View(account);
             }
@@ -114,6 +116,10 @@ namespace E_project.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (allowEdit == 1)
+                    {
+                        account.Password = Cipher.GenerateMD5(account.Password);
+                    }
                     _context.Update(account);
                     await _context.SaveChangesAsync();
                 }
@@ -130,6 +136,7 @@ namespace E_project.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.allowEdit = allowEdit;
             ViewBag.role = Role();
             return View(account);
         }

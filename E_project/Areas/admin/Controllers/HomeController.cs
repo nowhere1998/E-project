@@ -34,14 +34,14 @@ namespace E_project.Areas.Admin.Controllers
                 return View();
             }
             string passmd5 = Cipher.GenerateMD5(password);
-            var acc = _context.Accounts.SingleOrDefault(x => x.Email == email && x.Password == password);
+            var acc = _context.Accounts.SingleOrDefault(x => x.Email == email && x.Password == passmd5);
             if (acc == null)
             {
                 ViewBag.error = "<div class='alert alert-danger'>Wrong</div>";
                 ViewBag.Email = email;
                 return View();
             }
-            else if (!acc.Role.Equals("admin"))
+            else if (!acc.Role.Equals("Admin"))
             {
                 ViewBag.error = "<div class='alert alert-danger'>Not admin</div>";
                 ViewBag.Email = email;
