@@ -23,7 +23,7 @@ namespace E_project.Areas.Admin.Controllers
             var cards = await _context.Cards.Include(c => c.Category).ToListAsync();
             foreach (var card in cards)
             {
-                card.Image = "/user/assets/images/card/" + card.Image;
+                card.Image = "/images/card/" + card.Image;
             }
             return View(cards);
         }
@@ -75,7 +75,7 @@ namespace E_project.Areas.Admin.Controllers
             {
                 if (photo != null && photo.Length >= 0)
                 {
-                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/user/assets/images/card/", photo.FileName);
+                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/card/", photo.FileName);
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         photo.CopyTo(stream);
@@ -130,12 +130,12 @@ namespace E_project.Areas.Admin.Controllers
             }
             if (photo != null && photo.Length >= 0)
             {
-                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/user/assets/images/card/", photo.FileName);
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/card/", photo.FileName);
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     photo.CopyTo(stream);
                 }
-                card.Image = /*"/image/product/" */photo.FileName;
+                card.Image = photo.FileName;
             }
             if (ModelState.IsValid)
             {
