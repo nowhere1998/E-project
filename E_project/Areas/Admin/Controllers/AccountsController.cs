@@ -30,14 +30,19 @@ namespace E_project.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
-            var account = await _context.Accounts
-                .FirstOrDefaultAsync(m => m.AccountId == id);
+            var account = await _context.Accounts.FindAsync(id);
             if (account == null)
             {
                 return NotFound();
             }
-
+            var allowEdit = 0;
+            if (account.Email.Equals(User.FindFirst("Email")?.Value))
+            {
+                allowEdit = 1;
+            }
+            ViewBag.account = account;
+            ViewBag.allowEdit = allowEdit;
+            ViewBag.role = Role();
             return View(account);
         }
 
@@ -53,7 +58,7 @@ namespace E_project.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AccountId,AccountName,Email,Password,Balance,RenewalDate,Role")] Account account)
+        public async Task<IActionResult> Create([Bind("AccountId,AccountName,Email,Password,Balance,RenewalDate,Role")] Account account, IFormFile? photo)
         {
             if (_context.Accounts.AsNoTracking().FirstOrDefault(a => a.Email.Equals(account.Email)) != null)
             {
@@ -63,6 +68,16 @@ namespace E_project.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
+                if (photo != null && photo.Length >= 0)
+                {
+                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/user/", photo.FileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        photo.CopyTo(stream);
+                    }
+                    account.Image = photo.FileName;
+                }
+                account.CreationDate = DateTime.Now;
                 account.Password = Cipher.GenerateMD5(account.Password);
                 _context.Add(account);
                 await _context.SaveChangesAsync();
@@ -71,54 +86,43 @@ namespace E_project.Areas.Admin.Controllers
             ViewBag.role = Role();
             return View(account);
         }
-
-        // GET: Admin/Accounts/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var account = await _context.Accounts.FindAsync(id);
-            if (account == null)
-            {
-                return NotFound();
-            }
-            var allowEdit = 0;
-            if (account.Email.Equals(User.Claims.Skip(1).FirstOrDefault().Value))
-            {
-                allowEdit = 1;
-            }
-            ViewBag.allowEdit = allowEdit;
-            ViewBag.role = Role();
-            return View(account);
-        }
-
         // POST: Admin/Accounts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AccountId,AccountName,Email,Password,Balance,RenewalDate,Role")] Account account, byte? allowEdit)
+        public async Task<IActionResult> Edit(int id, [Bind("AccountId,AccountName,Email,Password,Balance,Image,RenewalDate,CreationDate,Role")] Account account, byte? allowEdit, IFormFile? photo, string? newPassword)
         {
             if (id != account.AccountId)
             {
                 return NotFound();
             }
+            var acc = _context.Accounts.AsNoTracking().FirstOrDefault(a => a.AccountId == id);
+            ViewBag.account = acc;
             if (_context.Accounts.AsNoTracking().FirstOrDefault(a => a.Email.Equals(account.Email) && a.AccountId != account.AccountId) != null)
             {
                 ViewBag.errorEmail = "This email is valid";
                 ViewBag.allowEdit = allowEdit;
                 ViewBag.role = Role();
-                return View(account);
+                return View("Details", account);
             }
+
             if (ModelState.IsValid)
             {
+                if (photo != null && photo.Length >= 0)
+                {
+                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/user/", photo.FileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        photo.CopyTo(stream);
+                    }
+                    account.Image = photo.FileName;
+                }
                 try
                 {
-                    if (allowEdit == 1)
+                    if (newPassword != null)
                     {
-                        account.Password = Cipher.GenerateMD5(account.Password);
+                        account.Password = Cipher.GenerateMD5(newPassword);
                     }
                     _context.Update(account);
                     await _context.SaveChangesAsync();
@@ -138,7 +142,7 @@ namespace E_project.Areas.Admin.Controllers
             }
             ViewBag.allowEdit = allowEdit;
             ViewBag.role = Role();
-            return View(account);
+            return View("Details", account);
         }
 
         // GET: Admin/Accounts/Delete/5
@@ -155,7 +159,11 @@ namespace E_project.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
+            if (account.Role == "Admin")
+            {
+                ViewBag.error = "This account is an administrator account, you cannot delete it.";
+                return View(account);
+            }
             return View(account);
         }
 

@@ -50,8 +50,10 @@ namespace E_project.Areas.Admin.Controllers
             {
                 var identity = new ClaimsIdentity(
                     new[] {
+                        new Claim("AccountId", acc.AccountId.ToString()),
                         new Claim("AccountName", acc.AccountName),
-                        new Claim("Email", acc.Email)
+                        new Claim("Email", acc.Email?.ToString() ?? ""),
+                        new Claim("Image", acc.Image ?? "Image"),
                     }, "EProjectSecurityScheme");
                 var principal = new ClaimsPrincipal(identity);
                 HttpContext.SignInAsync("EProjectSecurityScheme", principal);

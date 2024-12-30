@@ -28,9 +28,13 @@ namespace E_project.Models
         [Required]
         public string? Password { get; set; }
         [StringLength(300, ErrorMessage = "Picture URL cannot exceed 300 characters.")]
+        [DisplayName("Avatar")]
         public string? Image { get; set; }
         public double Balance { get; set; } = 0;
+        [DisplayName("Renewal Date")]
         public DateTime? RenewalDate { get; set; }
+        [DisplayName("Creation Date")]
+        public DateTime? CreationDate { get; set; }
         public string? Role { get; set; }
         public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
         public ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();

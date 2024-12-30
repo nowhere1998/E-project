@@ -11,45 +11,53 @@
     <h4>Card</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CardName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CardName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Status)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Status)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Image)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Image)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreateAt)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreationDate)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreateAt)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreationDate)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Category)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Category.CategoryName)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.CardId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div class="row">
+        <div class="col-lg-">
+            <img src="@Model.Image" width="100%"/>
+        </div>
+        <div class="col-lg-9"></div>
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CardId" class="btn btn-primary">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>

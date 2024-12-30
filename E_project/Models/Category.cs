@@ -17,6 +17,8 @@ namespace E_project.Models
         public string? CategoryName { get; set; }
         public bool Status { get; set; }
         public string? ParentCategory { get; set; }
+        [DisplayName("Creation Date")]
+        public DateTime? CreationDate { get; set; }
         public ICollection<Card> Cards { get; set; } = new List<Card>();
     }
 }
