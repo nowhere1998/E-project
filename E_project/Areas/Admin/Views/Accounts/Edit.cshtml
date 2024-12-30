@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-    bool allowEdit = ViewBag.allowEdit;
+    bool allowEdit = (ViewBag.allowEdit == 1) ? true : false;
 }
 
 <h1>Edit</h1>
@@ -15,7 +15,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="AccountId" />
-            <input type="hidden" name="allowEdit" value="@allowEdit" />
+            <input type="hidden" name="allowEdit" value="@ViewBag.allowEdit" />
             <div class="form-group">
                 <label asp-for="AccountName" class="control-label"></label>
                 <input asp-for="AccountName" class="form-control" />
@@ -33,6 +33,10 @@
                     <input asp-for="Password" class="form-control" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="Password" class="form-control" />
             }
             @* 
             <div class="form-group">

@@ -36,9 +36,9 @@
                 <img src="/images/card/@Model.Image" class="img-thumbnail" width="150px" />
             </div>
             <div class="form-group">
-                <label asp-for="CreateAt" class="control-label"></label>
-                <input asp-for="CreateAt" class="form-control" />
-                <span asp-validation-for="CreateAt" class="text-danger"></span>
+                <label asp-for="CreationDate" class="control-label"></label>
+                <input asp-for="CreationDate" class="form-control" />
+                <span asp-validation-for="CreationDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
@@ -58,7 +58,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
 
 @section Scripts {
