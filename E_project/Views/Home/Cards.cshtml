@@ -1,120 +1,154 @@
-﻿@{
+﻿@model X.PagedList.IPagedList<E_project.Models.Card>
+@using X.PagedList.Mvc.Core
+
+@{
     ViewData["Title"] = "Cards";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var name = ViewBag.CategoryName;
+    var categoryId = ViewData["categoryId"];
 }
-<!-- Cards Category Area Start-->
-<div class="cards_page_area">
 
-    <!-- Cards Category left Start-->
-    <div class="col-md-3">
-        <div class="cards_page_left">
+<!-- Content Area Strat-->
+<div class="content_area">
 
-            <!-- national days nav Start-->
-            <div class="national_days_nav">
-                <h1>Celebration</h1>
-                <ul>
-                    <li><a href="cards-Ambedkar%2bJayanti-23.html">Ambedkar Jayanti</a></li>
-                    <li><a href="cards-Fathers%2bDay-88.html">Father&#39;s Day</a></li>
-                    <li><a href="cards-Gandhi%2bJayanti-19.html">Gandhi Jayanti</a></li>
-                    <li><a href="cards-Good%2bGovernance%2bDay-65.html">Good Governance Day</a></li>
-                    <li><a href="cards-Independence%2bday-21.html">Independence day</a></li>
-                    <li><a href="cards-Mothers%2bDay-86.html">Mother&#39;s Day</a></li>
-                    <li><a href="cards-New%2bYear-12.html">New Year</a></li>
-                    <li><a href="cards-Republic%2bDay-9.html">Republic Day</a></li>
-                    <li><a href="cards-Teachers%2bday-61.html">Teacher&#39;s Day</a></li>
-                    <li><a href="cards-Yoga%2bday-87.html">Yoga day</a></li>
-                </ul>
-            </div>
-            <!-- national days nav End-->
-            <!-- list of winners Start-->
-            <div class="list_of_winners">
-                <div class="list_img"><a href="winners.html"><img src="/user/assets/images/golden-cup1.gif" alt="eGreetings Winners" title="eGreetings Winners"></a></div>
-                <div class="list_of_heading">
-                    List of Winners of
-                    design contest in
-                    eGreetings Portal
-                </div>
 
-                <div class="list_nav">
+    <div class="content_top_banner cards_bnr">
+        <h2 align="left" class="page_title">@ViewBag.CategoryName</h2>
+    </div>
+    <ul class="breadcrumb bgcol">
+        <li><a href="/home">Home</a></li>
+        <li><a href="#">@ViewBag.ParentCategory</a></li>
+        <li>@ViewBag.CategoryName</li>
+    </ul>
+    <div class="clearfix"></div>
+    <!-- Cards Category Area Start-->
+    <div class="cards_page_area">
+
+        <!-- Cards Category left Start-->
+        <div class="col-md-3">
+            <div class="cards_page_left">
+
+                <!-- national days nav Start-->
+                <div class="national_days_nav">
+                    <h1>@ViewBag.ParentCategory</h1>
                     <ul>
-                        <li><strong>Ambedkar Jayanti 2016</strong></li>
-                        <li>Nirmal Ghotekar</li>
-                        <li>Saurabh kumar ojha_3</li>
-                        <li>santosh_255</li>
+                        @if (ViewBag.Categories != null)
+                        {
+                            @foreach (var category in ViewBag.Categories)
+                            {
+                                @if (category.ParentCategory.ToLower().Equals(ViewBag.ParentCategory.ToLower()))
+                                {
+                                    <li><a href="/home/cards/@category.ParentCategory?categoryId=@category.CategoryId">@category.CategoryName</a></li>
+                                }
+                            }
+                        }
                     </ul>
                 </div>
+                <!-- national days nav End-->
+
             </div>
-            <!-- list of winners End-->
-
         </div>
-    </div>
-    <!-- Cards Category left End-->
-    <!-- Cards Category Right Start-->
-    <div class="col-md-9">
-        <div class="cards_page_right">
-            <h1>Ambedkar Jayanti Cards</h1>
+        <!-- Cards Category left End-->
+        <!-- Cards Category Right Start-->
+        <div class="col-md-9">
+            <div class="cards_page_right">
+                <h1>@ViewBag.CategoryName Cards</h1>
 
 
-            <div class="cards_product_area row" id="cards_product_area">
-                <!-- Block Area Strat-->
-                <div class="col-sm-6 col-xs-12 col-lg-3 col-md-3">
-                    <div class="col-item">
-                        <div class="photo-11">
-                            <a href="customize-Ambedkar%20Jayanti_1-3579.html">
-                                <img class="img-responsive img-portfolio img-hover" alt="Ambedkar Jayanti | eGreetings Portal" src="/user/assets/uploadedgreeting/Amberkar_1.png">
-                            </a>
-                        </div>
-                        <div class="info">
-                            <div class="infomiddle">
-                                <h2>Ambedkar Jayanti_1</h2>
-                                <span class="info-left">
-                                    <a href="ecustomize-Ambedkar%20Jayanti_1-3579.html"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit this card</a>
-                                </span>
-                                <span class="info-right shareModal-pointer" data-toggle="modal" data-target="#shareModal" onclick="setCardId('3579','Ambedkar Jayanti_1')"><img src="/user/assets/home-images/share1.png"></span>
-                                <div class="star-ratings">
-                                    <div class="starrate">
-                                        <div id="tutorial-3579">
-                                            <input type="hidden" name="rating" id="rating" value="53369" />
-                                            <ul onMouseOut="resetRating(3579);" style="text-align:center;">
-                                                <li class='selected' onmouseover="highlightStar(this,3579);" onmouseout="removeHighlight(3579);" onClick="addRating(this,3579);">&#9733;</li>
-                                                <li class='selected' onmouseover="highlightStar(this,3579);" onmouseout="removeHighlight(3579);" onClick="addRating(this,3579);">&#9733;</li>
-                                                <li class='selected' onmouseover="highlightStar(this,3579);" onmouseout="removeHighlight(3579);" onClick="addRating(this,3579);">&#9733;</li>
-                                                <li class='selected' onmouseover="highlightStar(this,3579);" onmouseout="removeHighlight(3579);" onClick="addRating(this,3579);">&#9733;</li>
-                                                <li class='selected' onmouseover="highlightStar(this,3579);" onmouseout="removeHighlight(3579);" onClick="addRating(this,3579);">&#9733;</li>
-                                                <ul>
+                <div class="cards_product_area row" id="cards_product_area">
+                    <!-- Block Area Strat-->
+                    @if (Model.Count != 0)
+                    {
+                        @foreach (var card in Model)
+                        {
+                            <div class="col-sm-6 col-xs-12 col-lg-3 col-md-3">
+                                <div class="col-item">
+                                    <div class="photo-11">
+                                        <a href="">
+                                            <img class="img-responsive img-portfolio img-hover" alt="Ambedkar Jayanti | eGreetings Portal" src="/images/card/@card.Image">
+                                        </a>
+                                    </div>
+                                    <div class="info">
+                                        <div class="infomiddle">
+                                            <h2>@card.CardName</h2>
+                                            <span class="info-left">
+                                                <a href="/home/edit-card/@card.CardId"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit card</a>
+                                            </span>
+                                            <span class="info-right shareModal-pointer" data-toggle="modal" data-target="#shareModal" onclick="setCardId('3579','Ambedkar Jayanti_1')"><img src="/user/assets/home-images/share1.png"></span>
+                                            <div class="star-ratings">
+                                                <div class="starrate">
+                                                    <div id="tutorial-3579">
+                                                        <input type="hidden" name="rating" id="rating" value="53369" />
+                                                        <ul onMouseOut="resetRating(3579);" style="text-align:center;">
+                                                            <li class='selected' onmouseover="highlightStar(this,3579);" onmouseout="removeHighlight(3579);" onClick="addRating(this,3579);">&#9733;</li>
+                                                            <li class='selected' onmouseover="highlightStar(this,3579);" onmouseout="removeHighlight(3579);" onClick="addRating(this,3579);">&#9733;</li>
+                                                            <li class='selected' onmouseover="highlightStar(this,3579);" onmouseout="removeHighlight(3579);" onClick="addRating(this,3579);">&#9733;</li>
+                                                            <li class='selected' onmouseover="highlightStar(this,3579);" onmouseout="removeHighlight(3579);" onClick="addRating(this,3579);">&#9733;</li>
+                                                            <li class='selected' onmouseover="highlightStar(this,3579);" onmouseout="removeHighlight(3579);" onClick="addRating(this,3579);">&#9733;</li>
+                                                            <ul>
+                                                    </div>
+                                                    <div align="center" id="rating_Response_3579"></div>
+                                                    <div align="center" id="resData_3579"><strong>53369</strong>/5 (1462 votes cast)</div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div align="center" id="rating_Response_3579"></div>
-                                        <div align="center" id="resData_3579"><strong>53369</strong>/5 (1462 votes cast)</div>
+                                        <a href="/home/SendCard/@card.CardId">
+                                            <div class="btn_area">
+                                                <span class="cstmbtn">
+                                                    <i class="fa fa-paper-plane-o"></i>&ensp;
+                                                    Send eCard
+                                                </span>
+                                            </div>
+                                        </a>
+
+                                        <div class="clearfix"></div>
                                     </div>
                                 </div>
+
                             </div>
-                            <a href="customize-Ambedkar%20Jayanti_1-3579.html">
-                                <div class="btn_area">
-                                    <span class="cstmbtn">
-                                        <i class="fa fa-paper-plane-o"></i>&ensp;
-                                        Send eCard
-                                    </span>
-                                </div>
-                            </a>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
+                        }
+                    }
+                    <!-- Block Area End-->
+
+                    <div class="clearfix"></div>
+                    <input type="hidden" id="row_no" value="9">
+                    <input type="hidden" id="cId" value="23">
+                    <input type="hidden" id="cName" value="Ambedkar Jayanti">
+                    <!--<div class="cards_load_more">
+                    <a href="javascript:void(0);">Scroll down to load more...</a>
+                     </div>-->
                 </div>
-                <!-- Block Area End-->
-
-                <div class="clearfix"></div>
-                <input type="hidden" id="row_no" value="9">
-                <input type="hidden" id="cId" value="23">
-                <input type="hidden" id="cName" value="Ambedkar Jayanti">
-                <!--<div class="cards_load_more">
-                <a href="javascript:void(0);">Scroll down to load more...</a>
-                 </div>-->
+                
+                <div id="loading" align="center"></div>
+                <div class="pagination_area mt_35 xs_mb_60 wow fadeInUp">
+                    <nav aria-label="Page navigation example">
+                        @if (Model.Count == 0)
+                        {
+                            <p class="text-center alert-danger">NO ITEM HAS NAME @name</p>
+                            <div>
+                                <a href="/home/cards/@ViewBag.ParentCategory">Back to List</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                @Html.PagedListPager(Model, page => Url.Action("cards", "home", new { page = page, name = name }),
+                                         new PagedListRenderOptions
+                            {
+                                UlElementClasses = new[] { "pagination", "justify-content-center" },
+                                LiElementClasses = new[] { "page-item" },
+                                PageClasses = new[] { "page-link" }
+                            })
+                            </div>
+                        }
+                    </nav>
+                </div>
             </div>
-            <div id="loading" align="center"></div>
-
         </div>
-    </div>
-    <!-- Cards Category Right End-->
+        <!-- Cards Category Right End-->
 
+    </div>
+    <!-- Cards Category Area End-->
+    <div class="clearfix"></div>
 </div>
-<!-- Cards Category Area End-->
+<!-- Content Area End-->

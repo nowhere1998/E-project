@@ -38,6 +38,7 @@
     <link rel="stylesheet" type="text/css" href="/user/assets/css/bootstrap-colorpicker.min.css">
     <link rel="stylesheet" type="text/css" href="/user/assets/css/winner.css" />
     <link rel="stylesheet" type="text/css" href="/user/assets/css/arch.css" />
+    <link rel="stylesheet" type="text/css" href="/sweetalert/sweetalert2.css" />
     <link rel="stylesheet" type="text/css" href="/user/assets/css/manage-dataTable.css" />
     <script type="text/javascript" src="/user/assets/js/modernizr.custom.29473.js"></script>
     <script type="text/javascript" src="/user/assets/js/jquery_3_7_0.min.js"></script>
@@ -68,8 +69,16 @@
                                 <li class="facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
                                 <li class="pdf"><a href="#" target="_blank"><i class="fa fa-file-pdf-o"></i></a></li>
                                 <li class="wheel"><a href="#" target="_blank"><i class="fa fa-wheelchair"></i></a></li>
-                                <li class="login"><a href="/home/login"><i class="fa fa-sign-in"></i>&ensp;Login</a></li>
-                                <li class="login"><a href="/home/register" target="_blank"><i class="fa fa-user-o"></i>&ensp;Register</a></li>
+                                @if (HttpContextAccessor.HttpContext.Session.GetString("accountName") == null)
+                                {
+                                    <li class="login"><a href="/home/login"><i class="fa fa-sign-in"></i>&ensp;Login</a></li>
+                                    <li class="login"><a href="/home/register"><i class="fa fa-user-o"></i>&ensp;Register</a></li>
+                                }
+                                else
+                                {
+                                    <li class="login"><a href="#"><i class="fa fa-user-o"></i>&ensp;Hello @HttpContextAccessor.HttpContext.Session.GetString("accountName")</a></li>
+                                    <li class="login"><a href=""><i class="fa fa-sign-in"></i>&ensp;Logout</a></li>
+                                }
                             </ul>
                         </div>
                     </div>
@@ -83,80 +92,93 @@
                                     <li class="srch mob-sideNav" id="sideNav"><i class="fa fa-bars" onclick="sideNav()"></i></li>
                                     <ul id="nav">
                                         <li class="parent-li nav-1">
-                                            <a href="#">Celebration</a>
+                                            <a href="/home/cards/Celebration">celebration</a>
                                             <ul>
-                                                <li><a href="cards-Ambedkar%2bJayanti-23.html">Ambedkar Jayanti</a></li>
-                                                <li><a href="cards-Fathers%2bDay-88.html">Father&#39;s Day</a></li>
-                                                <li><a href="cards-Gandhi%2bJayanti-19.html">Gandhi Jayanti</a></li>
-                                                <li><a href="cards-Good%2bGovernance%2bDay-65.html">Good Governance Day</a></li>
-                                                <li><a href="cards-Independence%2bday-21.html">Independence day</a></li>
-                                                <li><a href="cards-Mothers%2bDay-86.html">Mother&#39;s Day</a></li>
-                                                <li><a href="cards-New%2bYear-12.html">New Year</a></li>
-                                                <li><a href="cards-Republic%2bDay-9.html">Republic Day</a></li>
-                                                <li><a href="cards-Teachers%2bday-61.html">Teacher&#39;s Day</a></li>
-                                                <li><a href="cards-Yoga%2bday-87.html">Yoga day</a></li>
+                                                @if (ViewBag.Categories != null)
+                                                {
+                                                    @foreach (var category in ViewBag.Categories)
+                                                    {
+                                                        @if (category.ParentCategory.ToLower().Equals("celebration"))
+                                                        {
+                                                            <li><a href="/home/cards/@category.ParentCategory?categoryId=@category.CategoryId">@category.CategoryName</a></li>
+                                                        }
+                                                    }
+                                                }
                                             </ul>
                                         </li>
                                         <li class="parent-li nav-2">
-                                            <a href="#">Festivals</a>
+                                            <a href="/home/cards/Festivals">festivals</a>
                                             <ul>
-                                                <li><a href="cards-Buddha%2bPurnima-33.html">Buddha Purnima</a></li>
-                                                <li><a href="cards-Christmas-11.html">Christmas</a></li>
-                                                <li><a href="cards-Diwali-25.html">Diwali</a></li>
-                                                <li><a href="cards-Durga%2bPuja-27.html">Durga Puja</a></li>
-                                                <li><a href="cards-Dussehra-40.html">Dussehra</a></li>
-                                                <li><a href="cards-Easter-38.html">Easter</a></li>
-                                                <li><a href="cards-Eid-24.html">Eid</a></li>
-                                                <li><a href="cards-Ganesh%2bChaturthi-30.html">Ganesh Chaturthi</a></li>
-                                                <li><a href="cards-Good%2bFriday-100.html">Good Friday</a></li>
-                                                <li><a href="cards-Guru%2bNanak%2bGurpurab-62.html">Guru Nanak Gurpurab</a></li>
-                                                <li><a href="cards-Holi-26.html">Holi</a></li>
-                                                <li><a href="cards-Janmashtami-39.html">Janmashtami</a></li>
-                                                <li><a href="cards-Maha%2bShivratri-42.html">Maha Shivratri</a></li>
-                                                <li><a href="cards-Mahavir%2bJayanti-43.html">Mahavir Jayanti</a></li>
-                                                <li><a href="cards-Makar%2bSankranti%2bLohri%2bPongal-32.html">Makar Sankranti Lohri Pongal</a></li>
-                                                <li><a href="cards-Onam-57.html">Onam</a></li>
-                                                <li><a href="cards-Raksha%2bBandhan-31.html">Raksha Bandhan</a></li>
-                                                <li><a href="cards-Ram%2bNavami-28.html">Ram Navami</a></li>
-                                                <li><a href="cards-Rath%2bYatra-37.html">Rath Yatra</a></li>
-                                                <li><a href="cards-Vaisakhi-44.html">Vaisakhi</a></li>
-                                                <li><a href="cards-Vasant%2bPanchami-41.html">Vasant Panchami</a></li>
+                                                @if (ViewBag.Categories != null)
+                                                {
+                                                    @foreach (var category in ViewBag.Categories)
+                                                    {
+                                                        @if (category.ParentCategory.ToLower().Equals("festivals"))
+                                                        {
+                                                            <li><a href="/home/cards/@category.ParentCategory?categoryId=@category.CategoryId">@category.CategoryName</a></li>
+                                                        }
+                                                    }
+                                                }
                                             </ul>
                                         </li>
                                         <li class="parent-li nav-3">
-                                            <a href="#">Glimpses of India</a>
+                                            <a href="/home/cards/Glimpses of Vietnam">glimpses of vietnam</a>
                                             <ul>
-                                                <li><a href="cards-Cities-Countryside-17.html">Cities/Countryside</a></li>
-                                                <li><a href="cards-Modern%2bIndia-16.html">Modern India</a></li>
-                                                <li><a href="cards-Nature-6.html">Nature</a></li>
+                                                @if (ViewBag.Categories != null)
+                                                {
+                                                    @foreach (var category in ViewBag.Categories)
+                                                    {
+                                                        @if (category.ParentCategory.ToLower().Equals("glimpses of vietnam"))
+                                                        {
+                                                            <li><a href="/home/cards/@category.ParentCategory?categoryId=@category.CategoryId">@category.CategoryName</a></li>
+                                                        }
+                                                    }
+                                                }
                                             </ul>
                                         </li>
                                         <li class="parent-li nav-4">
-                                            <a href="#">Heritage</a>
+                                            <a href="/home/cards/Heritage">heritage</a>
                                             <ul>
-                                                <li><a href="cards-Monuments-15.html">Monuments</a></li>
-                                                <li><a href="cards-Music%2b%26%2bDance-14.html">Music & Dance</a></li>
+                                                @if (ViewBag.Categories != null)
+                                                {
+                                                    @foreach (var category in ViewBag.Categories)
+                                                    {
+                                                        @if (category.ParentCategory.ToLower().Equals("heritage"))
+                                                        {
+                                                            <li><a href="/home/cards/@category.ParentCategory?categoryId=@category.CategoryId">@category.CategoryName</a></li>
+                                                        }
+                                                    }
+                                                }
                                             </ul>
                                         </li>
                                         <li class="parent-li nav-5">
-                                            <a href="#">Ministry</a>
+                                            <a href="/home/cards/Ministry">ministry</a>
                                             <ul>
-                                                <li><a href="cards-Delhi%2bHigh%2bCourt-63.html">Delhi High Court</a></li>
-                                                <li><a href="cards-Electronics%2b%26%2bIT-97.html">Electronics & IT</a></li>
-                                                <li><a href="cards-Food%2bProcessing%2bIndustries-95.html">Food Processing Industries</a></li>
-                                                <li><a href="cards-Telecommunications-64.html">Telecommunications</a></li>
+                                                @if (ViewBag.Categories != null)
+                                                {
+                                                    @foreach (var category in ViewBag.Categories)
+                                                    {
+                                                        @if (category.ParentCategory.ToLower().Equals("ministry"))
+                                                        {
+                                                            <li><a href="/home/cards/@category.ParentCategory?categoryId=@category.CategoryId">@category.CategoryName</a></li>
+                                                        }
+                                                    }
+                                                }
                                             </ul>
                                         </li>
                                         <li class="parent-li nav-6">
-                                            <a href="#">MISCELLANEOUS</a>
+                                            <a href="/home/cards/Miscellaneous">miscellaneous</a>
                                             <ul>
-                                                <li><a href="cards-Birthday-83.html">Birthday</a></li>
-                                                <li><a href="cards-Congratulations-84.html">Congratulations</a></li>
-                                                <li><a href="cards-Get%2bWell%2bSoon-85.html">Get Well Soon</a></li>
-                                                <li><a href="cards-Happy%2bAnniversary-82.html">Happy Anniversary</a></li>
-                                                <li><a href="cards-Retirement-98.html">Retirement</a></li>
-                                                <li><a href="cards-Thank%2bYou-81.html">Thank You</a></li>
-                                                <li><a href="cards-Work%2bAnniversary-99.html">Work Anniversary</a></li>
+                                                @if (ViewBag.Categories != null)
+                                                {
+                                                    @foreach (var category in ViewBag.Categories)
+                                                    {
+                                                        @if (category.ParentCategory.ToLower().Equals("miscellaneous"))
+                                                        {
+                                                            <li><a href="/home/cards/@category.ParentCategory?categoryId=@category.CategoryId">@category.CategoryName</a></li>
+                                                        }
+                                                    }
+                                                }
                                             </ul>
                                         </li>
                                         <li class="srch" id="srch"><i class="fa fa-search"></i></li>
@@ -179,93 +201,105 @@
                 <i class="fa fa-times" id="closeNav"></i>
                 <div class="side-bar">
                     <ul class="side-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About eGreetings</a></li>
-                        <li><a href="winners.html">Winners</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="/home/about">About eGreetings</a></li>
+                        <li><a href="/home/feedback">Feedback</a></li>
                     </ul>
                     <ul class="side-name-2">
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Celebration</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="/home/cards/Celebration">Celebration</a>
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="cards-Ambedkar%2bJayanti-23.html">Ambedkar Jayanti</a></li>
-                                <li><a href="cards-Fathers%2bDay-88.html">Father&#39;s Day</a></li>
-                                <li><a href="cards-Gandhi%2bJayanti-19.html">Gandhi Jayanti</a></li>
-                                <li><a href="cards-Good%2bGovernance%2bDay-65.html">Good Governance Day</a></li>
-                                <li><a href="cards-Independence%2bday-21.html">Independence day</a></li>
-                                <li><a href="cards-Mothers%2bDay-86.html">Mother&#39;s Day</a></li>
-                                <li><a href="cards-New%2bYear-12.html">New Year</a></li>
-                                <li><a href="cards-Republic%2bDay-9.html">Republic Day</a></li>
-                                <li><a href="cards-Teachers%2bday-61.html">Teacher&#39;s Day</a></li>
-                                <li><a href="cards-Yoga%2bday-87.html">Yoga day</a></li>
+                                @if (ViewBag.Categories != null)
+                                {
+                                    @foreach (var category in ViewBag.Categories)
+                                    {
+                                        @if (category.ParentCategory.ToLower().Equals("celebration"))
+                                        {
+                                            <li><a href="/home/cards/@category.ParentCategory?categoryId=@category.CategoryId">@category.CategoryName</a></li>
+                                        }
+                                    }
+                                }
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Festivals</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="/home/cards/Festivals">festivals</a>
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="cards-Buddha%2bPurnima-33.html">Buddha Purnima</a></li>
-                                <li><a href="cards-Christmas-11.html">Christmas</a></li>
-                                <li><a href="cards-Diwali-25.html">Diwali</a></li>
-                                <li><a href="cards-Durga%2bPuja-27.html">Durga Puja</a></li>
-                                <li><a href="cards-Dussehra-40.html">Dussehra</a></li>
-                                <li><a href="cards-Easter-38.html">Easter</a></li>
-                                <li><a href="cards-Eid-24.html">Eid</a></li>
-                                <li><a href="cards-Ganesh%2bChaturthi-30.html">Ganesh Chaturthi</a></li>
-                                <li><a href="cards-Good%2bFriday-100.html">Good Friday</a></li>
-                                <li><a href="cards-Guru%2bNanak%2bGurpurab-62.html">Guru Nanak Gurpurab</a></li>
-                                <li><a href="cards-Holi-26.html">Holi</a></li>
-                                <li><a href="cards-Janmashtami-39.html">Janmashtami</a></li>
-                                <li><a href="cards-Maha%2bShivratri-42.html">Maha Shivratri</a></li>
-                                <li><a href="cards-Mahavir%2bJayanti-43.html">Mahavir Jayanti</a></li>
-                                <li><a href="cards-Makar%2bSankranti%2bLohri%2bPongal-32.html">Makar Sankranti Lohri Pongal</a></li>
-                                <li><a href="cards-Onam-57.html">Onam</a></li>
-                                <li><a href="cards-Raksha%2bBandhan-31.html">Raksha Bandhan</a></li>
-                                <li><a href="cards-Ram%2bNavami-28.html">Ram Navami</a></li>
-                                <li><a href="cards-Rath%2bYatra-37.html">Rath Yatra</a></li>
-                                <li><a href="cards-Vaisakhi-44.html">Vaisakhi</a></li>
-                                <li><a href="cards-Vasant%2bPanchami-41.html">Vasant Panchami</a></li>
+                                @if (ViewBag.Categories != null)
+                                {
+                                    @foreach (var category in ViewBag.Categories)
+                                    {
+                                        @if (category.ParentCategory.ToLower().Equals("festivals"))
+                                        {
+                                            <li><a href="/home/cards/@category.ParentCategory?categoryId=@category.CategoryId">@category.CategoryName</a></li>
+                                        }
+                                    }
+                                }
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Glimpses of India</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="/home/cards/Glimpses of Vietnam">glimpses of vietnam</a>
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="cards-Cities-Countryside-17.html">Cities/Countryside</a></li>
-                                <li><a href="cards-Modern%2bIndia-16.html">Modern India</a></li>
-                                <li><a href="cards-Nature-6.html">Nature</a></li>
+                                @if (ViewBag.Categories != null)
+                                {
+                                    @foreach (var category in ViewBag.Categories)
+                                    {
+                                        @if (category.ParentCategory.ToLower().Equals("glimpses of vietnam"))
+                                        {
+                                            <li><a href="/home/cards/@category.ParentCategory?categoryId=@category.CategoryId">@category.CategoryName</a></li>
+                                        }
+                                    }
+                                }
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Heritage</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="/home/cards/Heritage">heritage</a>
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="cards-Monuments-15.html">Monuments</a></li>
-                                <li><a href="cards-Music%2b%26%2bDance-14.html">Music & Dance</a></li>
+                                @if (ViewBag.Categories != null)
+                                {
+                                    @foreach (var category in ViewBag.Categories)
+                                    {
+                                        @if (category.ParentCategory.ToLower().Equals("heritage"))
+                                        {
+                                            <li><a href="/home/cards/@category.ParentCategory?categoryId=@category.CategoryId">@category.CategoryName</a></li>
+                                        }
+                                    }
+                                }
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Ministry</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="/home/cards/Ministry">ministry</a>
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="cards-Delhi%2bHigh%2bCourt-63.html">Delhi High Court</a></li>
-                                <li><a href="cards-Electronics%2b%26%2bIT-97.html">Electronics & IT</a></li>
-                                <li><a href="cards-Food%2bProcessing%2bIndustries-95.html">Food Processing Industries</a></li>
-                                <li><a href="cards-Telecommunications-64.html">Telecommunications</a></li>
+                                @if (ViewBag.Categories != null)
+                                {
+                                    @foreach (var category in ViewBag.Categories)
+                                    {
+                                        @if (category.ParentCategory.ToLower().Equals("ministry"))
+                                        {
+                                            <li><a href="/home/cards/@category.ParentCategory?categoryId=@category.CategoryId">@category.CategoryName</a></li>
+                                        }
+                                    }
+                                }
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">MISCELLANEOUS</a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="/home/cards/Miscellaneous">miscellaneous</a>
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="cards-Birthday-83.html">Birthday</a></li>
-                                <li><a href="cards-Congratulations-84.html">Congratulations</a></li>
-                                <li><a href="cards-Get%2bWell%2bSoon-85.html">Get Well Soon</a></li>
-                                <li><a href="cards-Happy%2bAnniversary-82.html">Happy Anniversary</a></li>
-                                <li><a href="cards-Retirement-98.html">Retirement</a></li>
-                                <li><a href="cards-Thank%2bYou-81.html">Thank You</a></li>
-                                <li><a href="cards-Work%2bAnniversary-99.html">Work Anniversary</a></li>
+                                @if (ViewBag.Categories != null)
+                                {
+                                    @foreach (var category in ViewBag.Categories)
+                                    {
+                                        @if (category.ParentCategory.ToLower().Equals("miscellaneous"))
+                                        {
+                                            <li><a href="/home/cards/@category.ParentCategory?categoryId=@category.CategoryId">@category.CategoryName</a></li>
+                                        }
+                                    }
+                                }
                             </ul>
                         </li>
                     </ul>
@@ -293,11 +327,11 @@
                             </div>
                             <div class="social_login modal-body">
                                 <div class="">
-                                    <a href="#" class="social_box fb" onclick="fbshareCurrentPage()">
+                                    <a href="#" class="social_box fb">
                                         <span class="icon"><i class="fa fa-facebook"></i></span>
                                         <span class="icon_title">Share on Facebook</span>
                                     </a>
-                                    <a href="#" class="social_box google" onclick="tweetCurrentPage()">
+                                    <a href="#" class="social_box google">
                                         <span class="icon"><i class="fa fa-twitter"></i></span>
                                         <span class="icon_title">Share on Twitter</span>
                                     </a>
@@ -361,15 +395,15 @@
                         <div class="col-md-6">
                             <div class="footer_block_one">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="winners.html">Winners</a></li>
-                                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                    <li><a href="terms-conditions.html">Terms & Conditions</a></li>
-                                    <li><a href="site-map.html">Sitemap</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="/user/assets/manuals/eGreetings_User_Manual.pdf" target="_blank">User Manual</a></li>
+                                    <li><a href="/home">Home</a></li>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="/home/login">Login</a></li>
+                                    <li><a href="#">Winners</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="/home/terms">Terms & Conditions</a></li>
+                                    <li><a href="#">Sitemap</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#" target="_blank">User Manual</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -427,7 +461,8 @@
     <script src="/user/assets/js/custom_js.js" type="text/javascript"></script>
     <script src="/user/assets/js/newjs.js" type="text/javascript"></script>
     <script src="/user/assets/js/bootstrap-tagsinput.js" type="text/javascript"></script>
-    @await RenderSectionAsync("Scripts", required:false)
+    <script src="/sweetalert/sweetalert2.min.js" type="text/javascript"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 <!-- Mirrored from egreetings.gov.in/cards-Ambedkar+Jayanti-23.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Dec 2024 07:44:36 GMT -->
