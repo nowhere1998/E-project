@@ -15,7 +15,7 @@ namespace E_project.Models
         [DataType(DataType.EmailAddress)]
         [StringLength(250, ErrorMessage = "Email cannot exceed 250 characters.")]
         [Required]
-        public string DestinationEmail { get; set; }
+        public string? DestinationEmail { get; set; }
         [ForeignKey("TransactionId")]
         public int TransactionId { get; set; }
         public Transaction? Transaction { get; set; }

@@ -3,53 +3,144 @@
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    bool allowEdit = (ViewBag.allowEdit == 1) ? true : false;
 }
 
 <h1>Details</h1>
+<div class="row">
+    <div class="col-md-3">
+        <!-- Profile Image -->
+        <div class="card card-primary card-outline">
+            <div class="card-body box-profile">
+                <div class="text-center mb-2">
+                    <img class="profile-user-img img-fluid img-circle" src="/images/user/@ViewBag.account.Image" alt="User profile picture" style="width:100px; height:100px">
+                </div>
 
-<div>
-    <h4>Account</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AccountName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AccountName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Balance)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Balance)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RenewalDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RenewalDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Role)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Role)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.AccountId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                <h3 class="profile-username text-center">@ViewBag.account.AccountName</h3>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                    <li class="list-group-item">
+                        <b>Email</b> <a class="float-right">@ViewBag.account.Email</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Balance</b> <a class="float-right">@ViewBag.account.Balance</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Renewal Date</b> <a class="float-right">@ViewBag.account.RenewalDate?.ToString("dd/MM/yyyy")</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Creation Date</b> <a class="float-right">@ViewBag.account.CreationDate?.ToString("dd/MM/yyyy")</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+    </div>
+    <div class="col-md-9">
+        <!-- About Me Box -->
+        <div class="card card-primary">
+            <div class="card-body">
+                <h3>Edit Detail</h3>
+                <form asp-action="Edit" asp-route-id="@Model.AccountId" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="AccountId" />
+                    <input type="hidden" asp-for="Image" />
+                    <input type="hidden" asp-for="CreationDate" />
+                    <input type="hidden" name="allowEdit" value="@ViewBag.allowEdit" />
+                    @if (allowEdit)
+                    {
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label asp-for="AccountName" class="control-label"></label>
+                                @{
+                                    string? errorAccountName = null;
+                                    if (ViewData.ModelState["AccountName"] != null && ViewData.ModelState["AccountName"].Errors.Count > 0)
+                                    {
+                                        errorAccountName = ViewData.ModelState["AccountName"].Errors[0].ErrorMessage;
+                                    }
+                                }
+                                <input asp-for="AccountName" class="form-control @(errorAccountName != null ? "is-invalid" : "")" placeholder="@errorAccountName" />
+                            </div>
+                            <div class="form-group col-6">
+                                <label asp-for="Email" class="control-label"></label>
+                                @{
+                                    string? errorEmail = null;
+                                    if (ViewData.ModelState["Email"] != null && ViewData.ModelState["Email"].Errors.Count > 0)
+                                    {
+                                        errorEmail = ViewData.ModelState["Email"].Errors[0].ErrorMessage;
+                                    }
+                                }
+                                <input asp-for="Email" class="form-control @(errorEmail != null ? "is-invalid" : "")" placeholder="@errorEmail" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label asp-for="Password" class="control-label"></label>
+                                <input name="newPassword" class="form-control" / type="password" placeholder="Leave blank if you do not want to change the password.">
+                                <input asp-for="Password" type="hidden" />
+                            </div>
+                            <div class="form-group col-6">
+                                <label asp-for="RenewalDate" class="control-label"></label>
+                                <input asp-for="RenewalDate" class="form-control" />
+                                <span asp-validation-for="RenewalDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label asp-for="Image" class="control-label"></label>
+                                <input type="file" class="form-control" name="photo" placeholder="Select an image to change the avatar." />
+                                <span asp-validation-for="Image" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-6">
+                                <label asp-for="Role" class="control-label"></label>
+                                <input type="hidden" asp-for="Role" />
+                                <span class="form-control">@Model.Role</span>
+                                <span asp-validation-for="Role" class="text-danger"></span>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label asp-for="AccountName" class="control-label"></label>
+                                <input asp-for="AccountName" class="form-control" type="hidden" />
+                                <span class="form-control">@Model.AccountName</span>
+                                <span asp-validation-for="AccountName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-6">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" type="hidden" />
+                                <span class="form-control">@Model.Email</span>
+                                <span asp-validation-for="Email" class="text-danger">@ViewBag.errorEmail</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <input type="hidden" asp-for="Password" class="form-control" />
+                            <div class="form-group col-6">
+                                <label asp-for="RenewalDate" class="control-label"></label>
+                                <input asp-for="RenewalDate" class="form-control" />
+                                <span asp-validation-for="RenewalDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label asp-for="Role" class="control-label"></label>
+                                <select asp-for="Role" class="form-control" asp-items="ViewBag.role"></select>
+                                <span asp-validation-for="Role" class="text-danger"></span>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
 </div>

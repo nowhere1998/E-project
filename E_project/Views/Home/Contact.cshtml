@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page_content">
+
+    <div class="about_content">
+        <h1>Contact Details</h1>
+        <div class="contact-data">
+            National Informatics Centre<br>
+            Department of Electronics &amp; Information Technology<br>
+            Ministry of Communications &amp; Information Technology<br>
+            A-Block, CGO Complex, Lodhi Road<br>
+            New Delhi - 110 003 India<br>
+            Email:egreetings[at]gov[dot]in<br>
+            Phone No - 011-24305101,02
+        </div>
+    </div>
+
+    <div class="contect-us-right">
+        <h1>Leave Us a Reply</h1>
+        <div id="response_prof"></div>
+        <div id="response_prof_trying"></div>
+        <form method="post" name="send_Qry" id="send_Qry" autocomplete="off">
+            <div class="form-group">
+                <input type="text" class="form-control" id="cName" name="cName" placeholder="Full Name" required="" autofocus="" fdprocessedid="526jvf">
+            </div>
+
+            <div class="form-group">
+                <input type="email" class="form-control" id="cEmail" name="cEmail" placeholder="Email Id" required="" fdprocessedid="qrxdl9">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="cSubject" name="cSubject" placeholder="Subject" required="" fdprocessedid="8dl9mp">
+            </div>
+
+            <div class="form-group">
+                <textarea class="form-control" rows="3" id="cComment" name="cComment" placeholder="comments" required=""></textarea>
+            </div>
+
+            @* <div class="form-group">
+                <input type="text" class="form-control" id="cCaptcha" name="cCaptcha" placeholder="Enter Captcha" style="float:left; width:50%;" fdprocessedid="0bnf5k">
+                <div style="float:left; margin-right:10px;padding-left:25px;"><img src="feedback-captcha/" id="captcha_img" alt="Captcha | eGreetings Portal"></div>
+                <div style="padding-top:7px;"><a href="javascript:;" title="Refresh Captcha | eGreetings Portal" onclick="document.getElementById('captcha_img').src = 'feedback-captcha/?' + Math.random(); return false"><img src="../assets/images/refresh.png"></a></div>
+            </div>
+            <input type="hidden" name="csrf_token" value="06764680123296503254788544311643"> *@
+            <div class="contact-btn"><button type="submit" id="send_Qry" class="button red bigrounded red_submit" fdprocessedid="s9ai9p">Submit</button></div>
+
+        </form>
+    </div>
+
+</div>

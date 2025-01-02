@@ -26,23 +26,24 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DestinationEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Transaction.TransactionId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TransactionDetailId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TransactionDetailId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TransactionDetailId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Transaction.TransactionId)
+                </td>
+                <td>
+                    @Html.Raw(((item.Status) ? "<span class=\"badge badge-primary\">Enable</span>" : "<span class=\"badge badge-warning\">Disable</span>"))
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TransactionDetailId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.TransactionDetailId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.TransactionDetailId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

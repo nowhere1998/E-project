@@ -39,6 +39,7 @@ namespace E_project.Areas.Admin.Controllers
             var card = await _context.Cards
                 .Include(c => c.Category)
                 .FirstOrDefaultAsync(m => m.CardId == id);
+            card.Image = "/images/card/" + card.Image;
             if (card == null)
             {
                 return NotFound();
@@ -50,7 +51,7 @@ namespace E_project.Areas.Admin.Controllers
         // GET: Admin/Cards/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName");
+            ViewData["CategoryId"] = new SelectList(_context.Categories.Where(c => c.Status == true), "CategoryId", "CategoryName");
             ViewBag.status = Status();
             return View();
         }
@@ -60,14 +61,14 @@ namespace E_project.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CardId,CardName,Status,Image,CreateAt,Description,CategoryId")] Card card, IFormFile? photo)
+        public async Task<IActionResult> Create([Bind("CardId,CardName,Status,Image,CreationDate,Description,CategoryId")] Card card, IFormFile? photo)
         {
 
             var cards = _context.Cards.ToList();
             if (cards.Any(c => c.CardName.ToLower().Equals(card.CardName.ToLower())))
             {
                 ViewBag.errorName = "Card Name is valid";
-                ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", card.CategoryId);
+                ViewData["CategoryId"] = new SelectList(_context.Categories.Where(c => c.Status == true), "CategoryId", "CategoryName", card.CategoryId);
                 ViewBag.status = Status();
                 return View(card);
             }
@@ -82,12 +83,12 @@ namespace E_project.Areas.Admin.Controllers
                     }
                     card.Image = /*"/image/product/" */photo.FileName;
                 }
-                card.CreateAt = DateTime.Now;
+                card.CreationDate = DateTime.Now;
                 _context.Add(card);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", card.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories.Where(c => c.Status == true), "CategoryId", "CategoryName", card.CategoryId);
             ViewBag.status = Status();
             return View(card);
         }
@@ -106,7 +107,7 @@ namespace E_project.Areas.Admin.Controllers
                 return NotFound();
             }
             ViewBag.status = Status();
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", card.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories.Where(c => c.Status == true), "CategoryId", "CategoryName", card.CategoryId);
             return View(card);
         }
 
@@ -115,7 +116,7 @@ namespace E_project.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CardId,CardName,Status,Image,CreateAt,Description,CategoryId")] Card card, IFormFile? photo)
+        public async Task<IActionResult> Edit(int id, [Bind("CardId,CardName,Status,Image,CreationDate,Description,CategoryId")] Card card, IFormFile? photo)
         {
             if (id != card.CardId)
             {
@@ -124,7 +125,7 @@ namespace E_project.Areas.Admin.Controllers
             if (_context.Cards.AsNoTracking().FirstOrDefault(c => c.CardName.ToLower().Equals(card.CardName.ToLower()) && c.CardId != card.CardId) != null)
             {
                 ViewBag.errorName = "Card Name is valid";
-                ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", card.CategoryId);
+                ViewData["CategoryId"] = new SelectList(_context.Categories.Where(c => c.Status == true), "CategoryId", "CategoryName", card.CategoryId);
                 ViewBag.status = Status();
                 return View(card);
             }
@@ -158,7 +159,7 @@ namespace E_project.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.status = Status();
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName", card.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories.Where(c => c.Status == true), "CategoryId", "CategoryName", card.CategoryId);
             return View(card);
         }
 
