@@ -16,6 +16,7 @@ namespace E_project.Models
         public string? Email { get; set; }
         [Column(TypeName = "ntext")]
         public string? Content { get; set; } = string.Empty;
+        [ForeignKey("AccountId")]
         public int AccountId { get; set; }
         public Account? Account { get; set; }
     }

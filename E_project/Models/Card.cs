@@ -20,7 +20,7 @@ namespace E_project.Models
         [StringLength(300, ErrorMessage = "Picture URL cannot exceed 300 characters.")]
         public string? Image { get; set; }
         [DisplayName("Creation Date")]
-        public DateTime? CreationDate { get; set; }
+        public DateTime? CreationDate { get; set; } = DateTime.Now;
         public string? Description { get; set; }
         [ForeignKey("CategoryId")]
         public int CategoryId { get; set; }

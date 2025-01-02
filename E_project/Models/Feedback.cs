@@ -13,7 +13,7 @@ namespace E_project.Models
         [Required]
         public string? Content { get; set; }
         [DisplayName("Creation Date")]
-        public DateTime? CreationDate { get; set; }
+        public DateTime? CreationDate { get; set; } = DateTime.Now;
         [ForeignKey("AccountId")]
         public int AccountId { get; set; }
         public Account? Account { get; set; }

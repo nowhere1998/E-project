@@ -20,6 +20,16 @@ namespace E_project.Areas.Admin.Controllers
         {
             return View();
         }
+        [Authorize]
+        [Route("search")]
+        public IActionResult Search(string search, string path)
+        {
+            /* if (path.ToLower().Contains("order/details"))
+             {
+                 return Redirect("/admin/orders" + "?name=" + search);
+             }*/
+            return Redirect(path + "?search=" + search);
+        }
         public IActionResult Login()
         {
             return View();

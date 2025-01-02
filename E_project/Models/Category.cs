@@ -18,7 +18,7 @@ namespace E_project.Models
         public bool Status { get; set; }
         public string? ParentCategory { get; set; }
         [DisplayName("Creation Date")]
-        public DateTime? CreationDate { get; set; }
+        public DateTime? CreationDate { get; set; } = DateTime.Now;
         public ICollection<Card> Cards { get; set; } = new List<Card>();
     }
 }

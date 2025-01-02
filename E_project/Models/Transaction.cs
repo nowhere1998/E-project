@@ -14,7 +14,7 @@ namespace E_project.Models
         [StringLength(300, ErrorMessage = "Picture URL cannot exceed 300 characters.")]
         public string? Image { get; set; }
         [DisplayName("Creation Date")]
-        public DateTime? CreationDate { get; set; }
+        public DateTime? CreationDate { get; set; } = DateTime.Now;
         public int Success { get; set; }
         [ForeignKey("AccountId")]
         public int AccountId { get; set; }
@@ -23,7 +23,7 @@ namespace E_project.Models
         public int CardId { get; set; }
         public Card? Card { get; set; }
 
-        public ICollection<TransactionDetail> transactionDetails { get; set; } = new List<TransactionDetail>();
+        public ICollection<TransactionDetail> TransactionDetails { get; set; } = new List<TransactionDetail>();
 
     }
 }

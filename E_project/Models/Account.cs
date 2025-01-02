@@ -34,7 +34,7 @@ namespace E_project.Models
         [DisplayName("Renewal Date")]
         public DateTime? RenewalDate { get; set; }
         [DisplayName("Creation Date")]
-        public DateTime? CreationDate { get; set; }
+        public DateTime? CreationDate { get; set; } = DateTime.Now;
         public string? Role { get; set; }
         public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
         public ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();

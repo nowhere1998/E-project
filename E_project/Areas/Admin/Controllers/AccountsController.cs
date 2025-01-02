@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList.Extensions;
 
 namespace E_project.Areas.Admin.Controllers
 {
@@ -18,9 +19,21 @@ namespace E_project.Areas.Admin.Controllers
         }
 
         // GET: Admin/Accounts
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? search, int page = 1)
         {
-            return View(await _context.Accounts.ToListAsync());
+            int pageSize = 8;
+            var results = await _context.Accounts.ToListAsync();
+            if (page < 1)
+            {
+                page = 1;
+            }
+            if (!string.IsNullOrEmpty(search))
+            {
+                results = results.Where(b => b.AccountName.Contains(search)).ToList();
+            }
+            var accounts = results.ToPagedList(page, pageSize);
+            ViewBag.search = search;
+            return View(accounts);
         }
 
         // GET: Admin/Accounts/Details/5
