@@ -166,7 +166,7 @@ namespace E_project.Areas.Admin.Controllers
                             {
                             new SelectListItem { Value = "Celebration", Text = "Celebration" },
                             new SelectListItem { Value = "Festivals", Text = "Festivals"},
-                            new SelectListItem { Value = "Glimpses of India", Text = "Glimpses of India"},
+                            new SelectListItem { Value = "Glimpses of India", Text = "Glimpses of VietName"},
                             new SelectListItem { Value = "Heritage", Text = "Heritage"},
                             new SelectListItem { Value = "Ministry", Text = "Ministry"},
                             new SelectListItem { Value = "MISCELLANEOUS", Text = "MISCELLANEOUS"}

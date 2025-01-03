@@ -9,7 +9,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
     </ul>
-    <form class="form-inline ml-auto" asp-action="Search" asp-controller="Home" asp-area="Admin">
+    <form class="form-inline ml-3" asp-action="Search" asp-controller="Home" asp-area="Admin">
         <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="search" value="@ViewBag.search" />
             <input type="hidden" name="path" value="@path"/>
@@ -20,4 +20,11 @@
             </div>
         </div>
     </form>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" asp-action="Logout" asp-controller="Home" asp-area="Admin" data-toggle="tooltip" title="Logout">
+                <i class="fas fa-arrow-circle-right"></i>
+            </a>
+        </li>
+    </ul>
 </nav>

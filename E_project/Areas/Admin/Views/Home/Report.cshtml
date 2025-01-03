@@ -1,0 +1,44 @@
+﻿@model IEnumerable<E_project.Models.TransactionDetail>
+@{
+    ViewData["Title"] = "Report";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Daily Transaction Report</h2>
+<div class="row pb-2 pt-2">
+    <div class="col-6">
+        <form class="form-inline" asp-action="Report" asp-controller="Home" asp-area="Admin">
+            <div class="input-group input-group-sm">
+                <label for="date">Date:</label>
+                <input class="form-control form-control-navbar ml-2" type="date" name="date" value="@ViewBag.date"/>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Card Image</th>
+            <th scope="col">Account</th>
+            <th scope="col">Destinal Email</th>
+            <th scope="col">Status</th>
+            <th scope="col">Card Name</th>
+        </tr>
+    </thead>
+    <tbody @foreach (var item in Model)
+    {
+                                            <tr>
+                                                   <td><img src="/images/card/@item.Transaction.Card.Image" alt="Picture" width="60px" /></td>
+                                                <td scope="col">@item.Transaction.Account.AccountName</td>
+                                                <td scope="col">@item.DestinationEmail</td>
+                                                <td scope="col">@Html.Raw(item.Status ? "<span class=\"badge badge-primary\">Enable</span>" : "<span class=\"badge badge-warning\">Disable</span>")</td>
+                                                <td scope="col">@item.Transaction.Card.CardName</td>
+                                            </tr>
+    }
+                </tbody>
+</table>

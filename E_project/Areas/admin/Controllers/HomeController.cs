@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace E_project.Areas.Admin.Controllers
@@ -30,6 +31,29 @@ namespace E_project.Areas.Admin.Controllers
              }*/
             return Redirect(path + "?search=" + search);
         }
+        [Authorize]
+        public async Task<IActionResult> Report(DateTime? date)
+        {
+            if (date == null)
+            {
+                date = DateTime.Now;
+            }
+            var dateConvert = date.Value.Date;  // Lấy chỉ phần ngày của DateTime và đảm bảo không bị null
+
+            var transactionDetails = await _context.TransactionDetails
+                .Include(td => td.Transaction)
+                .ThenInclude(t => t.Account)
+                .Include(td => td.Transaction)
+                .ThenInclude(t => t.Card)
+                .Where(td => td.Transaction.CreationDate.Value.Year == dateConvert.Year &&
+                             td.Transaction.CreationDate.Value.Month == dateConvert.Month &&
+                             td.Transaction.CreationDate.Value.Day == dateConvert.Day)
+                .ToListAsync();
+
+            ViewBag.date = dateConvert.ToString("yyyy-MM-dd");
+            return View(transactionDetails);
+        }
+
         public IActionResult Login()
         {
             return View();
