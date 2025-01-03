@@ -127,8 +127,7 @@ namespace E_project.Controllers
 
         [Route("/home/cards/{parentCategory}")]
         public IActionResult Cards(int page = 1, int categoryId = 0, string parentCategory = "", string cardName = "")
-        {
-            ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).ToList();
+        { 
             if(_context.Categories != null)
             {
                 foreach(var c in _context.Categories)
@@ -143,10 +142,12 @@ namespace E_project.Controllers
                         ViewBag.CategoryName = parentCategory;
                     }
                 }
+                ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).ToList();
             }
             else
             {
                 ViewBag.CategoryName = "";
+                ViewBag.Categories = new List<Category>();
             }
             ViewBag.ParentCategory = parentCategory;
             int pagesize = 8;
@@ -197,7 +198,7 @@ namespace E_project.Controllers
 
         [Route("/home/sendcard/{id}")]
         [HttpPost]
-        public async Task<IActionResult> SendCard(string email = "", string title = "", string image = "", string message = "", int id = 0)
+        public async Task<IActionResult> SendCard(string[] email, string title = "", string image = "", string message = "", int id = 0)
         {
             var card = _context.Cards.Where(c => c.CardId == id).SingleOrDefault();
             if (card == null)
@@ -231,7 +232,24 @@ namespace E_project.Controllers
             }
             try
             {
-                await _emailService.SendEmailWithImageAsync(email, title, message, "wwwroot/images/card/" + image);
+                Transaction transaction = new Transaction();
+                transaction.Image = image;
+                transaction.Success = 1;
+                transaction.CardId = id;
+                transaction.AccountId = int.Parse(HttpContext.Session.GetString("accountId")); 
+                _context.Add(transaction);
+                await _context.SaveChangesAsync();
+                Transaction newTransaction = _context.Transactions.OrderByDescending(t=>t.TransactionId).FirstOrDefault();
+                foreach(var e in email)
+                {
+                    await _emailService.SendEmailWithImageAsync(e, title, message, "wwwroot/images/card/" + image);
+                    TransactionDetail transactionDetail = new TransactionDetail();
+                    transactionDetail.DestinationEmail = e;
+                    transactionDetail.Status = true;
+                    transactionDetail.TransactionId = newTransaction.TransactionId;
+                    _context.Add(transactionDetail);
+                    await _context.SaveChangesAsync();
+                }
                 TempData["sendCardSuccess"] = "Send card success!";
                 return RedirectToAction("Index", "Home");
             }
