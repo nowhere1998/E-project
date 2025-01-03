@@ -1,4 +1,4 @@
-﻿
+﻿@model E_project.Models.Account
 @{
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,27 +21,33 @@
             <!-- Send Card Left Start-->
             <div class="">
                 <div class="">
-                    <form>
+                    <form asp-action="Register" method="post">
                         <div class="form-group">
                             <label for="fullName">Full Name</label>
-                            <input type="text" class="form-control" id="fullName" placeholder="Enter your full name">
+                            <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" asp-for="AccountName">
+                            <span asp-validation-for="AccountName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email" asp-for="Email">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <span class="text-danger">@ViewBag.Email</span>
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password" asp-for="Password">
+                            <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label for="confirmPassword">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirmPassword" placeholder="Re-enter your password">
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Re-enter your password" name="confirmPassword">
+                            <span class="text-danger">@ViewBag.ErrorConfirmPassword</span>
                         </div>
                         <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="termsCheck">
-                            <label class="form-check-label" for="termsCheck">I agree to the <a href="/terms" target="_blank">terms and conditions</a></label>
+                            <input type="checkbox" class="form-check-input" id="termsCheck" name="terms">
+                            <label class="form-check-label" for="termsCheck">I agree to the <a href="/home/terms" target="_blank">terms and conditions</a></label>
+                            <div class="text-danger">@ViewBag.Terms</div>
                         </div>
                         <button type="submit" class="btn btn-primary">Register</button>
                     </form>

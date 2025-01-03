@@ -9,7 +9,7 @@
     </div>
 
     <ul class="breadcrumb bgcol">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="/home">Home</a></li>
         <li>Sign In</li>
     </ul>
 
@@ -17,18 +17,19 @@
     <div class="page_content">
         <div class="about_content">
             <h2 class="text-center font-weight-bold">Login</h2>
+            @Html.Raw(ViewBag.Error)
             <!-- Send Card Left Start-->
             <div class="">
                 <div class="">
-                    <form>
+                    <form asp-action="Login" method="post">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="@ViewBag.Email" name="email">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
                         </div>
                         <div class="form-group d-flex justify-content-between align-items-center">
                             <div>
@@ -91,4 +92,19 @@
 
     </div>
 </div>
-
+@section Scripts
+{
+    @if (TempData["LoginRequire"] != null)
+{
+    <script>
+        // Hiển thị cảnh báo SweetAlert
+        Swal.fire({
+            title: 'Warning!',
+            text: '@TempData["LoginRequire"]',
+            icon: 'Warning', // warning, error, success, info
+            confirmButtonText: 'OK'
+        });
+    </script>
+    TempData.Clear();
+}
+}

@@ -44,45 +44,10 @@ namespace E_project.Controllers
             return View();
         }
 
-        [HttpPost("UploadCanvasImage")]
-        public IActionResult UploadCanvasImage([FromBody] CanvasImageModel model)
-        {
-            try
-            {
-                if (model?.ImageData == null)
-                {
-                    return BadRequest("No image data received.");
-                }
-
-                // Remove the Base64 header (e.g., "data:image/png;base64,")
-                var base64Data = model.ImageData.Split(',')[1];
-
-                // Convert Base64 to byte array
-                var imageBytes = Convert.FromBase64String(base64Data);
-
-                // Save the image to a file (e.g., wwwroot/images folder)
-                var fileName = $"canvas_image_{Guid.NewGuid()}.png";
-                var filePath = Path.Combine("wwwroot/images/", fileName);
-
-                System.IO.File.WriteAllBytes(filePath, imageBytes);
-
-                HttpContext.Session.SetString("canvasImage", fileName);
-
-                // Return success response with the file name or path
-                return RedirectToAction("Index", "Home");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
-            return RedirectToAction("Index", "Home");
-        }
+        
     }
     // Model to hold the image data
-    public class CanvasImageModel
-    {
-        public string ImageData { get; set; }
-    }
+    
 
     public class EmailRequest
     {
