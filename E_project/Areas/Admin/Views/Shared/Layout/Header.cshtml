@@ -13,6 +13,8 @@
         <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="search" value="@ViewBag.search" />
             <input type="hidden" name="path" value="@path"/>
+            <input type="hidden" name="categoryId" value="@ViewBag.id"/>
+            <input type="hidden" name="date" value="@ViewBag.date" />
             <div class="input-group-append">
                 <button class="btn btn-navbar" type="submit">
                     <i class="fas fa-search"></i>

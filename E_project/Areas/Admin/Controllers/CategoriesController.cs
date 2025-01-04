@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList.Extensions;
 
 namespace E_project.Areas.Admin.Controllers
 {
@@ -18,9 +19,21 @@ namespace E_project.Areas.Admin.Controllers
         }
 
         // GET: Admin/Categories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? search, int page = 1)
         {
-            return View(await _context.Categories.ToListAsync());
+            int pageSize = 8;
+            var results = await _context.Categories.ToListAsync();
+            if (page < 1)
+            {
+                page = 1;
+            }
+            if (!string.IsNullOrEmpty(search))
+            {
+                results = results.Where(c => c.CategoryName.ToLower().Contains(search.ToLower())).ToList();
+            }
+            var categories = results.ToPagedList(page, pageSize);
+            ViewBag.search = search;
+            return View(categories);
         }
 
         // GET: Admin/Categories/Details/5
@@ -130,13 +143,17 @@ namespace E_project.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories
+            var category = await _context.Categories.Include(c => c.Cards)
                 .FirstOrDefaultAsync(m => m.CategoryId == id);
             if (category == null)
             {
                 return NotFound();
             }
-
+            if (category.Cards.Any())
+            {
+                ViewBag.error = "This category has cards, you cannot delete it.";
+                return View(category);
+            }
             return View(category);
         }
 
@@ -166,7 +183,7 @@ namespace E_project.Areas.Admin.Controllers
                             {
                             new SelectListItem { Value = "Celebration", Text = "Celebration" },
                             new SelectListItem { Value = "Festivals", Text = "Festivals"},
-                            new SelectListItem { Value = "Glimpses of India", Text = "Glimpses of VietName"},
+                            new SelectListItem { Value = "Glimpses of VietName", Text = "Glimpses of VietName"},
                             new SelectListItem { Value = "Heritage", Text = "Heritage"},
                             new SelectListItem { Value = "Ministry", Text = "Ministry"},
                             new SelectListItem { Value = "MISCELLANEOUS", Text = "MISCELLANEOUS"}

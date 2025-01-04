@@ -16,7 +16,7 @@ namespace E_project.Models
         [StringLength(200, MinimumLength = 3, ErrorMessage = "Card Name must be between 3 and 200 characters.")]
         public string? CardName { get; set; }
         public bool Status { get; set; }
-
+        [Required(ErrorMessage = "Image is required.")]
         [StringLength(300, ErrorMessage = "Picture URL cannot exceed 300 characters.")]
         public string? Image { get; set; }
         [DisplayName("Creation Date")]

@@ -1,20 +1,16 @@
-﻿@model IEnumerable<E_project.Models.TransactionDetail>
+﻿@model X.PagedList.IPagedList<E_project.Models.TransactionDetail>
+@using X.PagedList.Mvc.Core
 @{
     ViewData["Title"] = "Report";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 <h2>Daily Transaction Report</h2>
 <div class="row pb-2 pt-2">
-    <div class="col-6">
-        <form class="form-inline" asp-action="Report" asp-controller="Home" asp-area="Admin">
-            <div class="input-group input-group-sm">
-                <label for="date">Date:</label>
-                <input class="form-control form-control-navbar ml-2" type="date" name="date" value="@ViewBag.date"/>
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+    <div class="col-3">
+        <form asp-action="Report" asp-controller="Home" asp-area="Admin" id="myForm">
+            <input type="hidden" name="search" value="@ViewBag.search" />
+            <div class="form-group">
+                <input class="form-control" type="date" name="date" value="@ViewBag.date" onchange="autoSubmit()" />
             </div>
         </form>
     </div>
@@ -36,9 +32,20 @@
                                                    <td><img src="/images/card/@item.Transaction.Card.Image" alt="Picture" width="60px" /></td>
                                                 <td scope="col">@item.Transaction.Account.AccountName</td>
                                                 <td scope="col">@item.DestinationEmail</td>
-                                                <td scope="col">@Html.Raw(item.Status ? "<span class=\"badge badge-primary\">Enable</span>" : "<span class=\"badge badge-warning\">Disable</span>")</td>
+                                                        <td scope="col">@Html.Raw(item.Status ? "<span class=\"badge badge-success\">Success</span>" : "<span class=\"badge badge-warning\">Failed</span>")</td>
                                                 <td scope="col">@item.Transaction.Card.CardName</td>
                                             </tr>
     }
                 </tbody>
 </table>
+<div class="d-flex justify-content-center">
+    @Html.PagedListPager(
+            Model,
+            page => Url.Action("Report", "Home", new { page = page, search = ViewBag.search, date = ViewBag.date }),
+            new PagedListRenderOptions
+    {
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link", "btn", "btn-primary" }
+    })
+</div>
+<script>function autoSubmit() { document.getElementById('myForm').submit(); }</script>

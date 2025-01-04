@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using X.PagedList.Extensions;
 
 namespace E_project.Areas.Admin.Controllers
 {
@@ -23,24 +24,33 @@ namespace E_project.Areas.Admin.Controllers
         }
         [Authorize]
         [Route("search")]
-        public IActionResult Search(string search, string path)
+        public IActionResult Search(string search, string path, int? categoryId, DateTime? date)
         {
-            /* if (path.ToLower().Contains("order/details"))
-             {
-                 return Redirect("/admin/orders" + "?name=" + search);
-             }*/
+            if (path.ToLower().Contains("/admin/home/report"))
+            {
+                return Redirect(path + "?search=" + search + "&encodedDate=" + Uri.EscapeDataString(date.ToString()));
+            }
+            if (path.ToLower().Contains("/admin/cards"))
+            {
+                return Redirect(path + "?search=" + search + "&categoryId=" + categoryId);
+            }
             return Redirect(path + "?search=" + search);
         }
         [Authorize]
-        public async Task<IActionResult> Report(DateTime? date)
+        public async Task<IActionResult> Report(string? search, DateTime? date, string? encodedDate, int page = 1)
         {
-            if (date == null)
+            int pageSize = 1;
+            if (date == null && encodedDate == null)
             {
                 date = DateTime.Now;
             }
-            var dateConvert = date.Value.Date;  // Lấy chỉ phần ngày của DateTime và đảm bảo không bị null
+            if (encodedDate != null)
+            {
+                date = DateTime.Parse(Uri.UnescapeDataString(encodedDate));
+            }
+            var dateConvert = date.Value.Date;
 
-            var transactionDetails = await _context.TransactionDetails
+            var results = await _context.TransactionDetails
                 .Include(td => td.Transaction)
                 .ThenInclude(t => t.Account)
                 .Include(td => td.Transaction)
@@ -49,8 +59,17 @@ namespace E_project.Areas.Admin.Controllers
                              td.Transaction.CreationDate.Value.Month == dateConvert.Month &&
                              td.Transaction.CreationDate.Value.Day == dateConvert.Day)
                 .ToListAsync();
-
+            if (page < 1)
+            {
+                page = 1;
+            }
+            if (!string.IsNullOrEmpty(search))
+            {
+                results = results.Where(td => td.Transaction.Account.AccountName.ToLower().Contains(search.ToLower())).ToList();
+            }
+            var transactionDetails = results.ToPagedList(page, pageSize);
             ViewBag.date = dateConvert.ToString("yyyy-MM-dd");
+            ViewBag.search = search;
             return View(transactionDetails);
         }
 

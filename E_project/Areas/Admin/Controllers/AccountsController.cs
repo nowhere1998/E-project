@@ -21,7 +21,7 @@ namespace E_project.Areas.Admin.Controllers
         // GET: Admin/Accounts
         public async Task<IActionResult> Index(string? search, int page = 1)
         {
-            int pageSize = 8;
+            int pageSize = 1;
             var results = await _context.Accounts.ToListAsync();
             if (page < 1)
             {
@@ -29,7 +29,7 @@ namespace E_project.Areas.Admin.Controllers
             }
             if (!string.IsNullOrEmpty(search))
             {
-                results = results.Where(b => b.AccountName.Contains(search)).ToList();
+                results = results.Where(a => a.AccountName.ToLower().Contains(search.ToLower())).ToList();
             }
             var accounts = results.ToPagedList(page, pageSize);
             ViewBag.search = search;
@@ -90,7 +90,6 @@ namespace E_project.Areas.Admin.Controllers
                     }
                     account.Image = photo.FileName;
                 }
-                account.CreationDate = DateTime.Now;
                 account.Password = Cipher.GenerateMD5(account.Password);
                 _context.Add(account);
                 await _context.SaveChangesAsync();

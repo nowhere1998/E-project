@@ -1,4 +1,5 @@
-﻿@model IEnumerable<E_project.Models.Category>
+﻿@model X.PagedList.IPagedList<E_project.Models.Category>
+@using X.PagedList.Mvc.Core
 
 @{
     ViewData["Title"] = "Index";
@@ -17,13 +18,16 @@
     <thead class="thead-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
+               CategoryName
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+               Status
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ParentCategory)
+               ParentCategory
+            </th>
+            <th>
+               CreationDate
             </th>
             <th>Actions</th>
         </tr>
@@ -41,6 +45,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ParentCategory)
                 </td>
+                <td>
+                    @(item.CreationDate.HasValue ? item.CreationDate.Value.ToString("dd/MM/yyyy") : "N/A")
+                </td>
                 <td class="project-actions">
                     <a asp-action="Edit" asp-route-id="@item.CategoryId" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" title="Edit">
                         <i class="fas fa-pencil-alt"></i>
@@ -53,7 +60,16 @@
         }
     </tbody>
 </table>
-
+<div class="d-flex justify-content-center">
+    @Html.PagedListPager(
+            Model,
+            page => Url.Action("Index", "Categories", new { page = page, search = ViewBag.search }),
+            new PagedListRenderOptions
+    {
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link", "btn", "btn-primary" }
+    })
+</div>
 @section Scripts {
     <script>
         $(function () {
