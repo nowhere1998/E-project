@@ -105,17 +105,24 @@ namespace E_project.Areas.Admin.Controllers
                 ViewBag.status = Status();
                 return View(card);
             }
+            if (photo != null && photo.Length >= 0)
+            {
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/card/", photo.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    photo.CopyTo(stream);
+                }
+                card.Image = photo.FileName;
+            }
+            else
+            {
+                ViewBag.errorImage = "Image is required";
+                ViewData["CategoryId"] = new SelectList(_context.Categories.Where(c => c.Status == true), "CategoryId", "CategoryName", card.CategoryId);
+                ViewBag.status = Status();
+                return View(card);
+            }
             if (ModelState.IsValid)
             {
-                if (photo != null && photo.Length >= 0)
-                {
-                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/card/", photo.FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        photo.CopyTo(stream);
-                    }
-                    card.Image = /*"/image/product/" */photo.FileName;
-                }
                 _context.Add(card);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

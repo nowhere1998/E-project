@@ -79,17 +79,21 @@ namespace E_project.Areas.Admin.Controllers
                 ViewBag.role = Role();
                 return View(account);
             }
+            if (photo != null && photo.Length >= 0)
+            {
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/user/", photo.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    photo.CopyTo(stream);
+                }
+                account.Image = photo.FileName;
+            }
+            else
+            {
+                account.Image = "user.jpg";
+            }
             if (ModelState.IsValid)
             {
-                if (photo != null && photo.Length >= 0)
-                {
-                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/user/", photo.FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        photo.CopyTo(stream);
-                    }
-                    account.Image = photo.FileName;
-                }
                 account.Password = Cipher.GenerateMD5(account.Password);
                 _context.Add(account);
                 await _context.SaveChangesAsync();
