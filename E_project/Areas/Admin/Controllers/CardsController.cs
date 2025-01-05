@@ -30,7 +30,7 @@ namespace E_project.Areas.Admin.Controllers
             {
                 page = 1;
             }
-            int pageSize = 1;
+            int pageSize = 8;
             categoryId = categoryId ?? 0;
             var categories = _context.Categories.ToList();
             categories.Insert(0, new Category { CategoryId = 0, CategoryName = "----------Chose Category----------" });

@@ -39,7 +39,7 @@ namespace E_project.Areas.Admin.Controllers
         [Authorize]
         public async Task<IActionResult> Report(string? search, DateTime? date, string? encodedDate, int page = 1)
         {
-            int pageSize = 1;
+            int pageSize = 8;
             if (date == null && encodedDate == null)
             {
                 date = DateTime.Now;

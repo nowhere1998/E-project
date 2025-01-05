@@ -20,7 +20,7 @@ namespace E_project.Areas.Admin.Controllers
         // GET: Admin/Feedbacks View();
         public async Task<IActionResult> Index(string? search, int page = 1)
         {
-            int pageSize = 1;
+            int pageSize = 10;
             var results = await _context.Feedbacks.Include(f => f.Account).ToListAsync();
             if (page < 1)
             {

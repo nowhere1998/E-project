@@ -21,7 +21,7 @@ namespace E_project.Areas.Admin.Controllers
         // GET: Admin/Accounts
         public async Task<IActionResult> Index(string? search, int page = 1)
         {
-            int pageSize = 1;
+            int pageSize = 10;
             var results = await _context.Accounts.ToListAsync();
             if (page < 1)
             {
@@ -138,6 +138,7 @@ namespace E_project.Areas.Admin.Controllers
                     }
                     _context.Update(account);
                     await _context.SaveChangesAsync();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -149,6 +150,11 @@ namespace E_project.Areas.Admin.Controllers
                     {
                         throw;
                     }
+                }
+                if (allowEdit == 1)
+                {
+                    ViewBag.reLogin = true;
+                    return View("Details", account);
                 }
                 return RedirectToAction(nameof(Index));
             }

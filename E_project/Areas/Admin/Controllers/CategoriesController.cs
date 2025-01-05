@@ -21,7 +21,7 @@ namespace E_project.Areas.Admin.Controllers
         // GET: Admin/Categories
         public async Task<IActionResult> Index(string? search, int page = 1)
         {
-            int pageSize = 8;
+            int pageSize = 10;
             var results = await _context.Categories.ToListAsync();
             if (page < 1)
             {
@@ -103,7 +103,7 @@ namespace E_project.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,CategoryName,Status,ParentCategory")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,CategoryName,CreationDate,Status,ParentCategory")] Category category)
         {
             ViewBag.parentCategories = ParentCategories();
             ViewBag.status = Status();
