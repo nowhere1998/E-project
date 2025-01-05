@@ -183,7 +183,7 @@ namespace E_project.Areas.Admin.Controllers
                             {
                             new SelectListItem { Value = "Celebration", Text = "Celebration" },
                             new SelectListItem { Value = "Festivals", Text = "Festivals"},
-                            new SelectListItem { Value = "Glimpses of VietName", Text = "Glimpses of VietName"},
+                            new SelectListItem { Value = "Glimpses of VietNam", Text = "Glimpses of VietNam"},
                             new SelectListItem { Value = "Heritage", Text = "Heritage"},
                             new SelectListItem { Value = "Ministry", Text = "Ministry"},
                             new SelectListItem { Value = "MISCELLANEOUS", Text = "MISCELLANEOUS"}
