@@ -165,7 +165,8 @@ namespace E_project.Areas.Admin.Controllers
             var category = await _context.Categories.FindAsync(id);
             if (category != null)
             {
-                _context.Categories.Remove(category);
+                category.Status = false;
+                _context.Update(category);
             }
 
             await _context.SaveChangesAsync();

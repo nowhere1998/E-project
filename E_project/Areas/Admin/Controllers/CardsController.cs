@@ -17,13 +17,6 @@ namespace E_project.Areas.Admin.Controllers
         {
             _context = context;
         }
-
-        // GET: Admin/Cards
-        /*public async Task<IActionResult> Index(string? search, int? categoryId, int page = 1)
-        {
-            var cards = await _context.Cards.Include(c => c.Category).ToListAsync();
-            return View(cards);
-        }*/
         public async Task<IActionResult> Index(string? search, int? categoryId, int page = 1)
         {
             if (page < 1)
@@ -229,7 +222,8 @@ namespace E_project.Areas.Admin.Controllers
             var card = await _context.Cards.FindAsync(id);
             if (card != null)
             {
-                _context.Cards.Remove(card);
+                card.Status = false;
+                _context.Update(card);
             }
 
             await _context.SaveChangesAsync();
