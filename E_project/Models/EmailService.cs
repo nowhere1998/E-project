@@ -17,7 +17,7 @@ namespace E_project.Models
         {
             // Tạo email message
             var email = new MimeMessage();
-            email.From.Add(new MailboxAddress("Your Name", _configuration["EmailSettings:SenderEmail"]));
+            email.From.Add(new MailboxAddress("E-Greeting", _configuration["EmailSettings:SenderEmail"]));
             email.To.Add(new MailboxAddress("", toEmail));
             email.Subject = subject;
 
