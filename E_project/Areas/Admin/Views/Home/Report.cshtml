@@ -1,0 +1,51 @@
+﻿@model X.PagedList.IPagedList<E_project.Models.TransactionDetail>
+@using X.PagedList.Mvc.Core
+@{
+    ViewData["Title"] = "Report";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Daily Transaction Report</h2>
+<div class="row pb-2 pt-2">
+    <div class="col-3">
+        <form asp-action="Report" asp-controller="Home" asp-area="Admin" id="myForm">
+            <input type="hidden" name="search" value="@ViewBag.search" />
+            <div class="form-group">
+                <input class="form-control" type="date" name="date" value="@ViewBag.date" onchange="autoSubmit()" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Card Image</th>
+            <th scope="col">Account</th>
+            <th scope="col">Destinal Email</th>
+            <th scope="col">Status</th>
+            <th scope="col">Card Name</th>
+        </tr>
+    </thead>
+    <tbody @foreach (var item in Model)
+    {
+                                            <tr>
+                                                   <td><img src="/images/card/@item.Transaction.Card.Image" alt="Picture" width="60px" /></td>
+                                                <td scope="col">@item.Transaction.Account.AccountName</td>
+                                                <td scope="col">@item.DestinationEmail</td>
+                                                        <td scope="col">@Html.Raw(item.Status ? "<span class=\"badge badge-success\">Success</span>" : "<span class=\"badge badge-warning\">Failed</span>")</td>
+                                                <td scope="col">@item.Transaction.Card.CardName</td>
+                                            </tr>
+    }
+                </tbody>
+</table>
+<div class="d-flex justify-content-center">
+    @Html.PagedListPager(
+            Model,
+            page => Url.Action("Report", "Home", new { page = page, search = ViewBag.search, date = ViewBag.date }),
+            new PagedListRenderOptions
+    {
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link", "btn", "btn-primary" }
+    })
+</div>
+<script>function autoSubmit() { document.getElementById('myForm').submit(); }</script>

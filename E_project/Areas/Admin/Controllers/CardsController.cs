@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList.Extensions;
 
 namespace E_project.Areas.Admin.Controllers
 {
@@ -18,14 +19,46 @@ namespace E_project.Areas.Admin.Controllers
         }
 
         // GET: Admin/Cards
-        public async Task<IActionResult> Index()
+        /*public async Task<IActionResult> Index(string? search, int? categoryId, int page = 1)
         {
             var cards = await _context.Cards.Include(c => c.Category).ToListAsync();
-            foreach (var card in cards)
-            {
-                card.Image = "/images/card/" + card.Image;
-            }
             return View(cards);
+        }*/
+        public async Task<IActionResult> Index(string? search, int? categoryId, int page = 1)
+        {
+            if (page < 1)
+            {
+                page = 1;
+            }
+            int pageSize = 8;
+            categoryId = categoryId ?? 0;
+            var categories = _context.Categories.ToList();
+            categories.Insert(0, new Category { CategoryId = 0, CategoryName = "----------Chose Category----------" });
+            ViewBag.categoryId = new SelectList(categories, "CategoryId", "CategoryName", categoryId);
+            if (categoryId != 0)
+            {
+                ViewBag.id = categoryId;
+                var bTL_Sem3Context = await _context.Cards.Include(p => p.Category).Where(p => p.CategoryId == categoryId).ToListAsync();
+                if (!string.IsNullOrEmpty(search))
+                {
+                    bTL_Sem3Context = bTL_Sem3Context.Where(b => b.CardName.Contains(search)).ToList();
+                    ViewBag.search = search;
+                }
+                var cards = bTL_Sem3Context.ToPagedList(page, pageSize);
+                return View(cards);
+            }
+            else
+            {
+                var bTL_Sem3Context = await _context.Cards.Include(p => p.Category).ToListAsync();
+                if (!string.IsNullOrEmpty(search))
+                {
+                    bTL_Sem3Context = bTL_Sem3Context.Where(b => b.CardName.Contains(search)).ToList();
+                    ViewBag.search = search;
+                }
+                var cards = bTL_Sem3Context.ToPagedList(page, pageSize);
+                return View(cards);
+            }
+
         }
 
         // GET: Admin/Cards/Details/5
@@ -72,18 +105,24 @@ namespace E_project.Areas.Admin.Controllers
                 ViewBag.status = Status();
                 return View(card);
             }
+            if (photo != null && photo.Length >= 0)
+            {
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/card/", photo.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    photo.CopyTo(stream);
+                }
+                card.Image = photo.FileName;
+            }
+            else
+            {
+                ViewBag.errorImage = "Image is required";
+                ViewData["CategoryId"] = new SelectList(_context.Categories.Where(c => c.Status == true), "CategoryId", "CategoryName", card.CategoryId);
+                ViewBag.status = Status();
+                return View(card);
+            }
             if (ModelState.IsValid)
             {
-                if (photo != null && photo.Length >= 0)
-                {
-                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/card/", photo.FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        photo.CopyTo(stream);
-                    }
-                    card.Image = /*"/image/product/" */photo.FileName;
-                }
-                card.CreationDate = DateTime.Now;
                 _context.Add(card);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

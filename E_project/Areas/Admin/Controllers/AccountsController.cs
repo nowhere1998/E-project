@@ -21,7 +21,7 @@ namespace E_project.Areas.Admin.Controllers
         // GET: Admin/Accounts
         public async Task<IActionResult> Index(string? search, int page = 1)
         {
-            int pageSize = 8;
+            int pageSize = 10;
             var results = await _context.Accounts.ToListAsync();
             if (page < 1)
             {
@@ -29,7 +29,7 @@ namespace E_project.Areas.Admin.Controllers
             }
             if (!string.IsNullOrEmpty(search))
             {
-                results = results.Where(b => b.AccountName.Contains(search)).ToList();
+                results = results.Where(a => a.AccountName.ToLower().Contains(search.ToLower())).ToList();
             }
             var accounts = results.ToPagedList(page, pageSize);
             ViewBag.search = search;
@@ -79,18 +79,21 @@ namespace E_project.Areas.Admin.Controllers
                 ViewBag.role = Role();
                 return View(account);
             }
+            if (photo != null && photo.Length >= 0)
+            {
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/user/", photo.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    photo.CopyTo(stream);
+                }
+                account.Image = photo.FileName;
+            }
+            else
+            {
+                account.Image = "user.jpg";
+            }
             if (ModelState.IsValid)
             {
-                if (photo != null && photo.Length >= 0)
-                {
-                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/user/", photo.FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        photo.CopyTo(stream);
-                    }
-                    account.Image = photo.FileName;
-                }
-                account.CreationDate = DateTime.Now;
                 account.Password = Cipher.GenerateMD5(account.Password);
                 _context.Add(account);
                 await _context.SaveChangesAsync();
@@ -139,6 +142,7 @@ namespace E_project.Areas.Admin.Controllers
                     }
                     _context.Update(account);
                     await _context.SaveChangesAsync();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -150,6 +154,11 @@ namespace E_project.Areas.Admin.Controllers
                     {
                         throw;
                     }
+                }
+                if (allowEdit == 1)
+                {
+                    ViewBag.reLogin = true;
+                    return View("Details", account);
                 }
                 return RedirectToAction(nameof(Index));
             }

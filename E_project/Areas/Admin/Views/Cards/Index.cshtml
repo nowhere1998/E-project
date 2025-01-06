@@ -1,33 +1,43 @@
-﻿@model IEnumerable<E_project.Models.Card>
+﻿@model X.PagedList.IPagedList<E_project.Models.Card>
+@using X.PagedList.Mvc.Core
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h1>@ViewData["Title"]</h1>
-
-<p>
-    <a asp-action="Create" class="btn btn-success">Create New</a>
-</p>
+<h2>Cards</h2>
+<div class="row py-2">
+    <div class="col-2">
+        <a asp-action="Create" class="btn btn-outline-success">Create New</a>
+    </div>
+    <div class="col-10">
+        <form asp-action="Index" method="get" class="form-inline" asp-controller="Cards">
+            <input type="hidden" name="search" value="@ViewBag.search" />
+            <div class="form-group">
+                <label for="CategoryId" class="mr-2">Chọn Danh Mục:</label>
+                <select id="CategoryId" class="form-control" asp-items="ViewBag.CategoryId" name="CategoryId" onchange="this.form.submit()"></select>
+            </div>
+        </form>
+    </div>
+</div>
 
 <table class="table table-striped table-hover">
     <thead class="thead-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Image)
+                Image
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CardName)
+                Card Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                Status
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreationDate)
+                CreationDate
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
+                Category
             </th>
             <th>Actions</th>
         </tr>
@@ -37,7 +47,7 @@
         {
             <tr>
                 <td>
-                    <img src="@item.Image" alt="Picture" width="60px" />
+                    <img src="/images/card/@item.Image" alt="Picture" width="60px" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CardName)
@@ -51,14 +61,15 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Category.CategoryName)
                 </td>
-                <td class="project-actions">@* 
-                    <a asp-action="Details" asp-route-id="@item.CardId" class="btn btn-info btn-sm" data-toggle="tooltip" title="View Details">
-                        <i class="fas fa-eye"></i>
-                    </a> *@
-                    <a asp-action="Edit" asp-route-id="@item.CardId" class="btn btn-primary btn-sm" data-toggle="tooltip" title="Edit">
+                <td class="project-actions">
+                    @*
+                <a asp-action="Details" asp-route-id="@item.CardId" class="btn btn-outline-info btn-outline-sm" data-toggle="tooltip" title="View Details">
+                <i class="fas fa-eye"></i>
+                </a> *@
+                    <a asp-action="Edit" asp-route-id="@item.CardId" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" title="Edit">
                         <i class="fas fa-pencil-alt"></i>
                     </a>
-                    <a asp-action="Delete" asp-route-id="@item.CardId" class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete">
+                    <a asp-action="Delete" asp-route-id="@item.CardId" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" title="Delete">
                         <i class="fas fa-trash"></i>
                     </a>
                 </td>
@@ -66,7 +77,16 @@
         }
     </tbody>
 </table>
-
+<div class="d-flex justify-content-center">
+    @Html.PagedListPager(
+            Model,
+            page => Url.Action("Index", "Cards", new { page = page, search = ViewBag.search, CategoryId = ViewBag.id }),
+            new PagedListRenderOptions
+    {
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link", "btn", "btn-primary" }
+    })
+</div>
 @section Scripts {
     <script>
         $(function () {

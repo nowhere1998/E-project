@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList.Extensions;
 
 namespace E_project.Areas.Admin.Controllers
 {
@@ -16,12 +17,23 @@ namespace E_project.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Admin/Feedbacks
-        public async Task<IActionResult> Index()
+        // GET: Admin/Feedbacks View();
+        public async Task<IActionResult> Index(string? search, int page = 1)
         {
-            return View(await _context.Feedbacks.ToListAsync());
+            int pageSize = 10;
+            var results = await _context.Feedbacks.Include(f => f.Account).ToListAsync();
+            if (page < 1)
+            {
+                page = 1;
+            }
+            if (!string.IsNullOrEmpty(search))
+            {
+                results = results.Where(f => f.Account.AccountName.ToLower().Contains(search.ToLower())).ToList();
+            }
+            var feedbacks = results.ToPagedList(page, pageSize);
+            ViewBag.search = search;
+            return View(feedbacks);
         }
-
         // GET: Admin/Feedbacks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -30,7 +42,7 @@ namespace E_project.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var feedback = await _context.Feedbacks
+            var feedback = await _context.Feedbacks.Include(f => f.Account)
                 .FirstOrDefaultAsync(m => m.FeedbackId == id);
             if (feedback == null)
             {

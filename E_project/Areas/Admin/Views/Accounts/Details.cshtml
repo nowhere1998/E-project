@@ -4,6 +4,7 @@
     ViewData["Title"] = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
     bool allowEdit = (ViewBag.allowEdit == 1) ? true : false;
+    bool reLogin = ViewBag.reLogin == true ? true : false;
 }
 
 <h1>Details</h1>
@@ -90,7 +91,7 @@
                         <div class="row">
                             <div class="form-group col-6">
                                 <label asp-for="Image" class="control-label"></label>
-                                <input type="file" class="form-control" name="photo" placeholder="Select an image to change the avatar." />
+                                <input type="file" class="form-control" name="photo" accept=".jpg, .jpeg, .png, .gif" />
                                 <span asp-validation-for="Image" class="text-danger"></span>
                             </div>
                             <div class="form-group col-6">
@@ -144,3 +145,16 @@
         <!-- /.card -->
     </div>
 </div>
+<script type="text/javascript">
+    function showUpdateAlert() {
+        alert("You have just updated your account, please log in again.");
+        // Redirect to login page
+        window.location.href = "/Admin/Home/Logout";
+    }
+</script>
+@if (reLogin)
+{
+    <script type="text/javascript">
+        showUpdateAlert();
+    </script>
+}

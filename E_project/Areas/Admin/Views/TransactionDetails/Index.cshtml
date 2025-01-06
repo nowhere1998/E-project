@@ -4,12 +4,14 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h2>TransactionDetails</h2>
+<div class="row pb-2 pt-2">
+    <div class="col-6">
+        <span>
+            <a asp-action="Create" class="btn btn-outline-success">Create New</a>
+        </span>
+    </div>
+</div>
 <table class="table">
     <thead>
         <tr>
