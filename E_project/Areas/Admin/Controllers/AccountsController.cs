@@ -75,7 +75,7 @@ namespace E_project.Areas.Admin.Controllers
         {
             if (_context.Accounts.AsNoTracking().FirstOrDefault(a => a.Email.Equals(account.Email)) != null)
             {
-                ViewBag.errorEmail = "This email is valid";
+                ViewBag.errorEmail = "This email already exists";
                 ViewBag.role = Role();
                 return View(account);
             }
@@ -117,23 +117,22 @@ namespace E_project.Areas.Admin.Controllers
             ViewBag.account = acc;
             if (_context.Accounts.AsNoTracking().FirstOrDefault(a => a.Email.Equals(account.Email) && a.AccountId != account.AccountId) != null)
             {
-                ViewBag.errorEmail = "This email is valid";
+                ViewBag.errorEmail = "This email already exists";
                 ViewBag.allowEdit = allowEdit;
                 ViewBag.role = Role();
                 return View("Details", account);
             }
-
+            if (photo != null && photo.Length >= 0)
+            {
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/user/", photo.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    photo.CopyTo(stream);
+                }
+                account.Image = photo.FileName;
+            }
             if (ModelState.IsValid)
             {
-                if (photo != null && photo.Length >= 0)
-                {
-                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/user/", photo.FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        photo.CopyTo(stream);
-                    }
-                    account.Image = photo.FileName;
-                }
                 try
                 {
                     if (newPassword != null)
@@ -197,7 +196,8 @@ namespace E_project.Areas.Admin.Controllers
             var account = await _context.Accounts.FindAsync(id);
             if (account != null)
             {
-                _context.Accounts.Remove(account);
+                account.Role = "Disable";
+                _context.Update(account);
             }
 
             await _context.SaveChangesAsync();
@@ -213,7 +213,8 @@ namespace E_project.Areas.Admin.Controllers
             return new List<SelectListItem>
                             {
                             new SelectListItem { Value = "Admin", Text = "Admin" },
-                            new SelectListItem { Value = "User", Text = "User"}
+                            new SelectListItem { Value = "User", Text = "User" },
+                            new SelectListItem { Value = "Disable", Text = "Disable"}
                             };
         }
     }
