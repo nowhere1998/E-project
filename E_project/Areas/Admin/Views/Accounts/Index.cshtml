@@ -7,9 +7,14 @@
 }
 <h2>Accounts</h2>
 <div class="row pb-2 pt-2">
-    <div class="col-6">
+    <div class="col-2">
         <span>
             <a asp-action="Create" class="btn btn-outline-success">Create New</a>
+        </span>
+    </div>
+    <div class="col-10">
+        <span clas>
+            @TempData["success"]
         </span>
     </div>
 </div>

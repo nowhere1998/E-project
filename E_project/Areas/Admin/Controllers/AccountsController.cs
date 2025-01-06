@@ -97,6 +97,7 @@ namespace E_project.Areas.Admin.Controllers
                 account.Password = Cipher.GenerateMD5(account.Password);
                 _context.Add(account);
                 await _context.SaveChangesAsync();
+                TempData["success"] = true;
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.role = Role();
