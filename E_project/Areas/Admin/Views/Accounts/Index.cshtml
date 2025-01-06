@@ -24,12 +24,6 @@
                Email
             </th>
             <th>
-               Balance
-            </th>
-            <th>
-               RenewalDate
-            </th>
-            <th>
                CreationDate
             </th>
             <th>
@@ -49,17 +43,23 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Balance)
-                </td>
-                <td>
-                    @(item.RenewalDate.HasValue ? item.RenewalDate.Value.ToString("dd/MM/yyyy") : "N/A")
-                </td>
-                <td>
                     @(item.CreationDate.HasValue ? item.CreationDate.Value.ToString("dd/MM/yyyy") : "N/A")
                 </td>
                 <td>
-                    @Html.Raw(item.Role == "Admin" ? "<span class=\"badge badge-primary\">Admin</span>" : "<span class=\"badge badge-secondary\">User</span>")
+                    @if (item.Role == "Admin")
+                    {
+                        @Html.Raw("<span class=\"badge badge-primary\">Admin</span>")
+                    }
+                    else if (item.Role == "User")
+                    {
+                        @Html.Raw("<span class=\"badge badge-secondary\">User</span>")
+                    }
+                    else if (item.Role == "Disable")
+                    {
+                        @Html.Raw("<span class=\"badge badge-danger\">Disabled</span>")
+                    }
                 </td>
+
                 <td class="project-actions">
                     <a asp-action="Details" asp-route-id="@item.AccountId" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="View Details">
                         <i class="fas fa-eye"></i>
