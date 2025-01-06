@@ -1,5 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Http
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    var path = Context.Request.Path;
+}
 <!DOCTYPE html>
 <html lang="en-US">
 
@@ -65,10 +68,9 @@
                         </div>
                         <div class="header_top_right">
                             <ul>
-                                <li class="twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                <li class="facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                <li class="pdf"><a href="#" target="_blank"><i class="fa fa-file-pdf-o"></i></a></li>
-                                <li class="wheel"><a href="#" target="_blank"><i class="fa fa-wheelchair"></i></a></li>
+                                <li class="twitter"><a href=""><i class="fa fa-twitter"></i></a></li>
+                                <li class="facebook"><a href=""><i class="fa fa-facebook"></i></a></li>
+                                
                                 @if (HttpContextAccessor.HttpContext.Session.GetString("accountName") == null)
                                 {
                                     <li class="login"><a href="/home/login"><i class="fa fa-sign-in"></i>&ensp;Login</a></li>
@@ -76,8 +78,9 @@
                                 }
                                 else
                                 {
-                                    <li class="login"><a href="#"><i class="fa fa-user-o"></i>&ensp;Hello @HttpContextAccessor.HttpContext.Session.GetString("accountName")</a></li>
-                                    <li class="login"><a href=""><i class="fa fa-sign-in"></i>&ensp;Logout</a></li>
+                                    <li class="wheel"><a href=""><i class="fa fa-history"></i>&ensp;History</a></li>
+                                    <li class="login"><a href=""><i class="fa fa-user-o"></i>&ensp;Hello @HttpContextAccessor.HttpContext.Session.GetString("accountName")</a></li>
+                                    <li class="login"><a href="/home/logout"><i class="fa fa-sign-in"></i>&ensp;Logout</a></li>
                                 }
                             </ul>
                         </div>
@@ -190,9 +193,14 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="search_area" id="srchData">
-                            <input type="text" class="form-control" id="searchCat" name="srchString" placeholder="Search Here"><i class="glyphicon glyphicon-search" style="margin-right: 10px; float: right; margin-top: -25px;"></i>
-                        </div>
+                        <form asp-action="Search">
+                            <div class="search_area" id="srchData">
+                                <input type="text" class="form-control" id="searchCat" name="cardName" placeholder="Search Here">
+                                <button type="submit">
+                                    <i class="glyphicon glyphicon-search" style="margin-right: 10px; float: right; margin-top: -25px;"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- 3.0 -->
@@ -203,7 +211,7 @@
                     <ul class="side-nav">
                         <li><a href="/home">Home</a></li>
                         <li><a href="/home/about">About eGreetings</a></li>
-                        <li><a href="/home/feedback">Feedback</a></li>
+                        <li><a href="/home/contact?path=/home/contact">Feedback</a></li>
                     </ul>
                     <ul class="side-name-2">
                         <li class="dropdown">
@@ -396,13 +404,13 @@
                             <div class="footer_block_one">
                                 <ul>
                                     <li><a href="/home">Home</a></li>
-                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="/home/about">About Us</a></li>
                                     <li><a href="/home/login">Login</a></li>
                                     <li><a href="#">Winners</a></li>
                                     <li><a href="#">Privacy Policy</a></li>
                                     <li><a href="/home/terms">Terms & Conditions</a></li>
                                     <li><a href="#">Sitemap</a></li>
-                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="/home/contact?path=/home/contact">Contact Us</a></li>
                                     <li><a href="#" target="_blank">User Manual</a></li>
                                 </ul>
                             </div>

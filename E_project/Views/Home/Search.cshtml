@@ -2,10 +2,10 @@
 @using X.PagedList.Mvc.Core
 
 @{
-    ViewData["Title"] = "Cards";
+    ViewData["Title"] = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var name = ViewBag.CategoryName;
-    var categoryId = ViewData["categoryId"];
+    var cardName = ViewData["cardName"];
+    var parentCategory = ViewData["parentCategory"];
     var path = Context.Request.Path;
 }
 
@@ -17,8 +17,7 @@
     </div>
     <ul class="breadcrumb bgcol">
         <li><a href="/home">Home</a></li>
-        <li><a href="#">@ViewBag.ParentCategory</a></li>
-        <li>@ViewBag.CategoryName</li>
+        <li><a href="/home/search">Category</a></li>
     </ul>
     <div class="clearfix"></div>
     <!-- Cards Category Area Start-->
@@ -30,18 +29,14 @@
 
                 <!-- national days nav Start-->
                 <div class="national_days_nav">
-                    <h1>@ViewBag.ParentCategory</h1>
+                    <h1>Category</h1>
                     <ul>
-                        @if (ViewBag.Categories != null)
-                        {
-                            @foreach (var category in ViewBag.Categories)
-                            {
-                                @if (category.ParentCategory.ToLower().Equals(ViewBag.ParentCategory.ToLower()))
-                                {
-                                    <li><a href="/home/cards/@category.ParentCategory?categoryId=@category.CategoryId">@category.CategoryName</a></li>
-                                }
-                            }
-                        }
+                        <li><a href="/home/search?parentCategory=Celebration&cardName=@cardName">Celebration</a></li>
+                        <li><a href="/home/search?parentCategory=Festivals&cardName=@cardName">Festivals</a></li>
+                        <li><a href="/home/search?parentCategory=Glimpses of Vietnam&cardName=@cardName">Glimpses of Vietnam</a></li>
+                        <li><a href="/home/search?parentCategory=Heritage&cardName=@cardName">Heritage</a></li>
+                        <li><a href="/home/search?parentCategory=Ministry&cardName=@cardName">Ministry</a></li>
+                        <li><a href="/home/search?parentCategory=Miscellaneous&cardName=@cardName">Miscellaneous</a></li>
                     </ul>
                 </div>
                 <!-- national days nav End-->
@@ -52,7 +47,7 @@
         <!-- Cards Category Right Start-->
         <div class="col-md-9">
             <div class="cards_page_right">
-                <h1>@ViewBag.CategoryName Cards</h1>
+                <h1>@parentCategory Cards</h1>
 
 
                 <div class="cards_product_area row" id="cards_product_area">
@@ -118,21 +113,21 @@
                     <a href="javascript:void(0);">Scroll down to load more...</a>
                      </div>-->
                 </div>
-                
+
                 <div id="loading" align="center"></div>
                 <div class="pagination_area mt_35 xs_mb_60 wow fadeInUp">
                     <nav aria-label="Page navigation example">
                         @if (Model.Count == 0)
                         {
-                            <p class="text-center alert-danger">NO ITEM HAS NAME @name</p>
+                            <p class="text-center alert-danger">NO ITEM HAS NAME @cardName</p>
                             <div>
-                                <a href="/home/cards/@ViewBag.ParentCategory">Back to List</a>
+                                <a href="/home/search">Back to List</a>
                             </div>
                         }
                         else
                         {
                             <div>
-                                @Html.PagedListPager(Model, page => Url.Action("cards", "home", new { page = page, name = name, categoryId = categoryId }),
+                                @Html.PagedListPager(Model, page => Url.Action("cards", "home", new { page = page, cardName = cardName, parentCategory = parentCategory }),
                                          new PagedListRenderOptions
                             {
                                 UlElementClasses = new[] { "pagination", "justify-content-center" },
@@ -151,3 +146,6 @@
     <!-- Cards Category Area End-->
     <div class="clearfix"></div>
 </div>
+
+
+

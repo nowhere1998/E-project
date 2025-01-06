@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "SendCard";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var path = Context.Request.Path;
 }
 
 <div class="content_area">
@@ -116,13 +117,13 @@
                             <div class="row-fluid send_mar">
                                 <div class="col-md-12">
                                     <label>Message Section</label>
-                                    <select name="template_message" class="form-control" id="e_select_message" onchange="chkind()">
+                                    <select name="template_message" class="form-control" id="e_select_message" onchange="changeMessage()">
                                         <option value="0">--- Browse Messages ---</option>
-                                        <option value="181">Its the day of celebration and glorification, its the  day for the most important Person, who taught the lesson of Self confidence.  Happy Ambedkar Jayanti</option>
-                                        <option value="182">Life should be great rather than long. Wish you a very Happy Ambedkar Jayanti</option>
-                                        <option value="183">The progress of a community is measured by the degree of progress which women have achieved. Wish you a very Happy Ambedkar Jayanti</option>
-                                        <option value="184">We are because he was. Happy Ambedkar Jayanti !</option>
-                                        <option value="185">A great man is different from an eminent one in that he is ready to be the servant of the society.Happy Ambedkar Jayanti !</option>
+                                        <option value="181">Its the day of celebration and glorification</option>
+                                        <option value="182">Life should be great rather than long. Wish you a very Happy New Year</option>
+                                        <option value="183">The progress of a community is measured by the degree of progress which women have achieved. Wish you a very Happy New Year</option>
+                                        <option value="184">We are because he was. Happy New Year !</option>
+                                        <option value="185">A great man is different from an eminent one in that he is ready to be the servant of the society.Happy New Year !</option>
                                     </select>
                                 </div>
                             </div>
@@ -135,115 +136,6 @@
                             </div>
                             <!--<input name="message" type="hidden" id="msg">-->
 
-                            @* <div class="col-md-12">
-                                <label>Theme Section</label>
-                                <div class="row-fluid">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <input type="radio" id="theme01" name="theme" value="selecttheme" onchange="picker(this.value)" checked="checked">
-                                            <label for="theme01" style="color:#4d4d4d;font-weight:300;"><span></span>Theme</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="radio" id="theme02" name="theme" value="selectcolor" onchange="picker(this.value)">
-                                            <label for="theme02" style="color:#4d4d4d;font-weight:300;"><span></span>Customize Theme</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 send_mar">
-                                <div id="thm2" class="thm2" style="display:block;">
-                                    <select name="Themeid" id="Themeid" class="form-control">
-                                        <option value="Default">Default Theme</option>
-                                        <option value="Theme1">Theme 1</option>
-                                        <option value="Theme2">Theme 2</option>
-                                        <option value="Theme3">Theme 3</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- testing preview theme -->
-                            <!-- testing preview theme -->
-
-                            <div id="thm1" class="thm1" style="display:none;">
-                                <div class="row-fluid send_mar">
-                                    <div class="col-md-6">
-                                        <div class="example">
-                                            <div class="example-title">Background Color</div>
-                                            <div style="padding-top:15px;">
-                                                <div>
-                                                    <div id="cp2" class="input-group colorpicker-component colorpicker-element">
-                                                        <input type="text" name="bgcolor" id="bgcolor" value="#eb7c3c" class="form-control">
-                                                        <span class="input-group-addon" style="border: 1px solid #CCC;padding:0px 3px 0px 3px;"><i style="height: 29px; background: rgb(25, 103, 167); width: 29px; border-radius: 100%; margin-top: 0px;"></i></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="example">
-                                            <div class="example-title">Text Color</div>
-                                            <div style="padding-top:15px;">
-                                                <div>
-                                                    <div id="cp3" class="input-group colorpicker-component colorpicker-element">
-                                                        <input type="text" name="txtcolor" id="txtcolor" value="#003" class="form-control">
-                                                        <span class="input-group-addon" style="border: 1px solid #CCC;padding:0px 3px 0px 3px;"><i style="height: 29px; background: rgb(0, 240, 0); width: 29px; border-radius: 100%; margin-top: 0px;"></i></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row-fluid ">
-                                <div class="col-md-12">
-                                    <label>Font Style Section</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 send_mar">
-                                <div id="thm2" style="">
-
-                                    <select name="FontStyle" id="FontStyle" class="form-control">
-                                        <option value="DefaultFont">Default Font Style</option>
-                                        <option value="Font1">Font Style 1</option>
-                                        <option value="Font2">Font Style 2</option>
-                                        <option value="Font3">Font Style 3</option>
-                                        <option value="Font4">Font Style 4</option>
-                                        <option value="Font5">Font Style 5</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <div class=" col-md-12">
-                                <label>Quotes Section</label>
-                                <div class="row-fluid">
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <input type="checkbox" name="c1" onclick="showMe(&#39;div1&#39;,&#39;res&#39;)">
-                                            <span style="color:#4d4d4d;font-weight:300;">Quote or Slogan?</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="div1" style="display:none">
-                                <div class="row-fluid">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>&nbsp;</label>
-                                            <input type="radio" id="radio03" name="squote" value="ministry" onclick="GetQuotes(this.value)">
-                                            <label for="radio03" style="color:#4d4d4d;font-weight:300;"><span></span>Slogans from Ministry</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>&nbsp;</label>
-                                            <input type="radio" id="radio04" value="pm" name="squote" onclick="GetQuotes(this.value)">
-                                            <label for="radio04" style="color:#4d4d4d;font-weight:300;"><span></span>Quotes from Hon'ble PM</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> *@
 
                             <div id="res"> </div>
                             <input type="hidden" name="csrf_token" value="42490585695188614015112415779119" />
@@ -298,5 +190,15 @@
             // Di chuyển con trỏ đến ô nhập email mới
             nextEmailInput.focus();
         });
+    </script>
+
+    <script>
+        function changeMessage(){
+            var selectElement = document.getElementById("e_select_message");
+
+            // Lấy văn bản của option đã chọn
+            var selectedText = selectElement.options[selectElement.selectedIndex].text;
+            document.getElementById("e_custom_message").value = selectedText;
+        }
     </script>
 }

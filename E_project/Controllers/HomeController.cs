@@ -28,30 +28,39 @@ namespace E_project.Controllers
         {
             ViewBag.NewCards = _context.Cards
                 .OrderByDescending(c => c.CardId)
+                .Where(c => c.Status == true)
                 .Skip(0)
                 .Take(4)
                 .ToList();
-            ViewBag.Categories = _context.Categories.OrderByDescending(c=>c.CategoryId).ToList();
+            ViewBag.Categories = _context.Categories.OrderByDescending(c=>c.CategoryId).Where(c => c.Status == true).ToList();
             return View();
         }
 
         public IActionResult Login()
         {
-            ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).ToList();
+            if (TempData["Path"] != null)
+            {
+                ViewBag.Path = TempData["Path"];
+            }
+            ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).Where(c => c.Status == true).ToList();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(string email = "", string password = "")
+        public IActionResult Login(string email = "", string password = "", string path = "")
         {
-            ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).ToList();
+            ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).Where(c => c.Status == true).ToList();
             string passmd5 = "";
             passmd5 = Cipher.GenerateMD5(password);
-            var acc = _context.Accounts.SingleOrDefault(x => x.Email == email && x.Password == passmd5);
+            var acc = _context.Accounts.SingleOrDefault(x => x.Email == email && x.Password == passmd5 && x.Role != "Disable");
             if (acc != null)
             {
                 HttpContext.Session.SetString("accountName", acc.AccountName);
                 HttpContext.Session.SetString("accountId", acc.AccountId.ToString());
+                if (!path.IsNullOrEmpty())
+                {
+                    return Redirect(path);
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.error = "<p class='alert alert-danger text-center'>Email or password is incorrect!</p>";
@@ -72,14 +81,14 @@ namespace E_project.Controllers
 
         public IActionResult Register()
         {
-            ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).ToList();
+            ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).Where(c => c.Status == true).ToList();
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Register(IFormCollection form, [Bind("AccountName, Email, Password")]Account account, string confirmPassword = "")
         {
-            ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).ToList();
+            ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).Where(c => c.Status == true).ToList();
             bool check = true;
             if (_context.Accounts.Any(x => x.Email == account.Email))
             {
@@ -115,7 +124,7 @@ namespace E_project.Controllers
 
         public IActionResult Terms()
         {
-            ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).ToList();
+            ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).Where(c => c.Status == true).ToList();
             return View();
         }
 
@@ -130,7 +139,7 @@ namespace E_project.Controllers
         { 
             if(_context.Categories != null)
             {
-                foreach(var c in _context.Categories)
+                foreach(var c in _context.Categories.Where(c => c.Status == true))
                 {
                     if(c.CategoryId == categoryId)
                     {
@@ -142,7 +151,7 @@ namespace E_project.Controllers
                         ViewBag.CategoryName = parentCategory;
                     }
                 }
-                ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).ToList();
+                ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).Where(c => c.Status == true).ToList();
             }
             else
             {
@@ -156,6 +165,7 @@ namespace E_project.Controllers
             {
                 var cards = _context.Cards.Include(c => c.Category)
                 .OrderByDescending(c => c.CardId)
+                .Where(c => c.Status == true)
                 .Where(c => c.Category.ParentCategory.ToLower().Equals(parentCategory.ToLower()))
                 .Where(c => c.CardName.ToLower().Contains(cardName.ToLower())) 
                 .ToPagedList(page, pagesize);
@@ -167,6 +177,7 @@ namespace E_project.Controllers
             {
                 var cards = _context.Cards.Include(c => c.Category)
                 .OrderByDescending(c => c.CardId)
+                .Where(c => c.Status == true)
                 .Where(c => c.Category.ParentCategory.ToLower().Equals(parentCategory.ToLower()))
                 .Where(c => c.CardName.ToLower().Contains(cardName.ToLower()) && c.CategoryId == categoryId)
                 .ToPagedList(page, pagesize);
@@ -176,18 +187,77 @@ namespace E_project.Controllers
             }
         }
 
+        public IActionResult Search(int page = 1, string parentCategory = "", string cardName = "")
+        { 
+            if(_context.Categories != null)
+            {
+                ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).Where(c => c.Status == true).ToList();
+            }
+            else
+            {
+                ViewBag.CategoryName = "";
+                ViewBag.Categories = new List<Category>();
+            }
+            ViewBag.ParentCategory = parentCategory;
+            int pagesize = 8;
+            page = page < 1 ? 1 : page;
+            var cards = _context.Cards.Include(c => c.Category)
+                .ToPagedList(page, pagesize);
+            ViewData["cardName"] = cardName;
+            ViewData["parentCategory"] = parentCategory;
+
+            if (parentCategory.Equals("") && !cardName.Equals(""))
+            {
+                cards = _context.Cards.Include(c => c.Category)
+                .OrderByDescending(c => c.CardId)
+                .Where(c => c.Status == true)
+                .Where(c => c.CardName.ToLower().Contains(cardName.ToLower()))
+                .ToPagedList(page, pagesize);
+            }
+
+            if (parentCategory.Equals("") && cardName.Equals(""))
+            {
+                cards = _context.Cards.Include(c => c.Category)
+                .OrderByDescending(c => c.CardId)
+                .Where(c => c.Status == true)
+                .ToPagedList(page, pagesize);
+            }
+
+            if (!parentCategory.Equals("") && !cardName.Equals(""))
+            {
+                cards = _context.Cards.Include(c => c.Category)
+                .OrderByDescending(c => c.CardId)
+                .Where(c => c.Status == true)
+                .Where(c => c.Category.ParentCategory.ToLower().Contains(parentCategory.ToLower()))
+                .Where(c => c.CardName.ToLower().Contains(cardName.ToLower()))
+                .ToPagedList(page, pagesize);
+            }
+
+            if (!parentCategory.Equals("") && cardName.Equals(""))
+            {
+                cards = _context.Cards.Include(c => c.Category)
+                .OrderByDescending(c => c.CardId)
+                .Where(c => c.Status == true)
+                .Where(c => c.Category.ParentCategory.ToLower().Contains(parentCategory.ToLower()))
+                .ToPagedList(page, pagesize);
+            }
+            return View(cards);
+        }
+
         [Route("/home/sendcard/{id}")]
-        public IActionResult SendCard(int id = 0, string editCard = "")
+        public IActionResult SendCard(int id = 0, string editCard = "", string path = "")
         {
             if (!checkLogin())
             {
                 TempData["LoginRequire"] = "Please login first!";
+                TempData["Path"] = path;
                 return RedirectToAction("Login");
             }
             if (editCard.Equals(""))
             {
                 HttpContext.Session.Remove("ImageEditCard");
             }
+            ViewBag.Categories = _context.Categories.OrderByDescending(c => c.CategoryId).Where(c => c.Status == true).ToList();
             var card = _context.Cards.Where(c => c.CardId == id).SingleOrDefault();
             if (card == null)
             {
@@ -200,7 +270,7 @@ namespace E_project.Controllers
         [HttpPost]
         public async Task<IActionResult> SendCard(string[] email, string title = "", string image = "", string message = "", int id = 0)
         {
-            var card = _context.Cards.Where(c => c.CardId == id).SingleOrDefault();
+            var card = _context.Cards.Where(c => c.CardId == id).Where(c => c.Status == true).SingleOrDefault();
             if (card == null)
             {
                 return RedirectToAction("Index");
@@ -250,7 +320,7 @@ namespace E_project.Controllers
                     _context.Add(transactionDetail);
                     await _context.SaveChangesAsync();
                 }
-                TempData["sendCardSuccess"] = "Send card success!";
+                TempData["Success"] = "Send card success!";
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
@@ -260,11 +330,16 @@ namespace E_project.Controllers
         }
 
         [Route("/home/edit-card/{id}")]
-        public IActionResult EditCard(int id)
+        public IActionResult EditCard(int id = 0, string path = "")
         {
+            if (id == 0)
+            {
+                return RedirectToAction("Index");
+            }
             if (!checkLogin())
             {
                 TempData["LoginRequire"] = "Please login first!";
+                TempData["Path"] = path;
                 return RedirectToAction("Login");
             }
             var card = _context.Cards.Where(c => c.CardId == id).SingleOrDefault();
@@ -304,6 +379,38 @@ namespace E_project.Controllers
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
+        }
+
+        public IActionResult Contact(string path = "")
+        {
+            if (!checkLogin())
+            {
+                TempData["LoginRequire"] = "Please login first!";
+                TempData["Path"] = path;
+                return RedirectToAction("Login");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendContact(string content = "")
+        {
+            if (content.Equals(""))
+            {
+                return RedirectToAction("Contact");
+            }
+            Feedback feedback = new Feedback();
+            feedback.Content = content;
+            feedback.AccountId = int.Parse(HttpContext.Session.GetString("accountId"));
+            _context.Add(feedback);
+            await _context.SaveChangesAsync();
+            TempData["Success"] = "Send feedback success!";
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult About()
+        {
+            return View();
         }
 
         public IActionResult Privacy()

@@ -22,6 +22,7 @@
             <div class="">
                 <div class="">
                     <form asp-action="Login" method="post">
+                        <input type="hidden" name="path" value="@ViewBag.Path" />
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
                             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="@ViewBag.Email" name="email">
