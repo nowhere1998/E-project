@@ -75,6 +75,8 @@ namespace E_project.Areas.Admin.Controllers
             {
                 _context.Add(category);
                 await _context.SaveChangesAsync();
+                TempData["message"] = "Category successfully created.";
+                TempData["state"] = "Successfully.";
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -130,6 +132,8 @@ namespace E_project.Areas.Admin.Controllers
                         throw;
                     }
                 }
+                TempData["message"] = "Category successfully updated.";
+                TempData["state"] = "Successfully.";
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
@@ -170,6 +174,8 @@ namespace E_project.Areas.Admin.Controllers
             }
 
             await _context.SaveChangesAsync();
+            TempData["message"] = "Category successfully deleted.";
+            TempData["state"] = "Successfully.";
             return RedirectToAction(nameof(Index));
         }
 

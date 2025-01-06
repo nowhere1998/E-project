@@ -118,6 +118,8 @@ namespace E_project.Areas.Admin.Controllers
             {
                 _context.Add(card);
                 await _context.SaveChangesAsync();
+                TempData["message"] = "Card successfully created.";
+                TempData["state"] = "Successfully.";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories.Where(c => c.Status == true), "CategoryId", "CategoryName", card.CategoryId);
@@ -188,6 +190,8 @@ namespace E_project.Areas.Admin.Controllers
                         throw;
                     }
                 }
+                TempData["message"] = "Card successfully updated.";
+                TempData["state"] = "Successfully.";
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.status = Status();
@@ -227,6 +231,8 @@ namespace E_project.Areas.Admin.Controllers
             }
 
             await _context.SaveChangesAsync();
+            TempData["message"] = "Card successfully deleted.";
+            TempData["state"] = "Successfully.";
             return RedirectToAction(nameof(Index));
         }
 
