@@ -276,11 +276,15 @@ namespace E_project.Controllers
                 return RedirectToAction("Index");
             }
             bool check = true;
-            if (email.IsNullOrEmpty())
+            foreach(var e in email)
             {
-                ViewBag.ErrorEmail = "Email can not null!";
-                check = false;
+                if (e.IsNullOrEmpty())
+                {
+                    ViewBag.ErrorEmail = "Email can not null!";
+                    check = false;
+                }
             }
+            
             if (title.IsNullOrEmpty())
             {
                 ViewBag.ErrorTitle = "Title can not null!";
