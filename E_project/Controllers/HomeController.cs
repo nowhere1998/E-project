@@ -166,8 +166,8 @@ namespace E_project.Controllers
                 var cards = _context.Cards.Include(c => c.Category)
                 .OrderByDescending(c => c.CardId)
                 .Where(c => c.Status == true)
-                .Where(c => c.Category.ParentCategory.ToLower().Equals(parentCategory.ToLower()))
-                .Where(c => c.CardName.ToLower().Contains(cardName.ToLower())) 
+                .Where(c => c.Category.ParentCategory.ToLower().Equals(parentCategory.ToLower().Trim()))
+                .Where(c => c.CardName.ToLower().Contains(cardName.ToLower().Trim())) 
                 .ToPagedList(page, pagesize);
                 ViewData["name"] = cardName;
                 ViewData["categoryId"] = categoryId;
@@ -178,8 +178,8 @@ namespace E_project.Controllers
                 var cards = _context.Cards.Include(c => c.Category)
                 .OrderByDescending(c => c.CardId)
                 .Where(c => c.Status == true)
-                .Where(c => c.Category.ParentCategory.ToLower().Equals(parentCategory.ToLower()))
-                .Where(c => c.CardName.ToLower().Contains(cardName.ToLower()) && c.CategoryId == categoryId)
+                .Where(c => c.Category.ParentCategory.ToLower().Equals(parentCategory.ToLower().Trim()))
+                .Where(c => c.CardName.ToLower().Contains(cardName.ToLower().Trim()) && c.CategoryId == categoryId)
                 .ToPagedList(page, pagesize);
                 ViewData["name"] = cardName;
                 ViewData["categoryId"] = categoryId;
@@ -211,7 +211,7 @@ namespace E_project.Controllers
                 cards = _context.Cards.Include(c => c.Category)
                 .OrderByDescending(c => c.CardId)
                 .Where(c => c.Status == true)
-                .Where(c => c.CardName.ToLower().Contains(cardName.ToLower()))
+                .Where(c => c.CardName.ToLower().Contains(cardName.ToLower().Trim()))
                 .ToPagedList(page, pagesize);
             }
 
@@ -228,8 +228,8 @@ namespace E_project.Controllers
                 cards = _context.Cards.Include(c => c.Category)
                 .OrderByDescending(c => c.CardId)
                 .Where(c => c.Status == true)
-                .Where(c => c.Category.ParentCategory.ToLower().Contains(parentCategory.ToLower()))
-                .Where(c => c.CardName.ToLower().Contains(cardName.ToLower()))
+                .Where(c => c.Category.ParentCategory.ToLower().Contains(parentCategory.ToLower().Trim()))
+                .Where(c => c.CardName.ToLower().Contains(cardName.ToLower().Trim()))
                 .ToPagedList(page, pagesize);
             }
 
@@ -238,7 +238,7 @@ namespace E_project.Controllers
                 cards = _context.Cards.Include(c => c.Category)
                 .OrderByDescending(c => c.CardId)
                 .Where(c => c.Status == true)
-                .Where(c => c.Category.ParentCategory.ToLower().Contains(parentCategory.ToLower()))
+                .Where(c => c.Category.ParentCategory.ToLower().Contains(parentCategory.ToLower().Trim()))
                 .ToPagedList(page, pagesize);
             }
             return View(cards);

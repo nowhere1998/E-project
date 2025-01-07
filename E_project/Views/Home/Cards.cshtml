@@ -117,37 +117,39 @@
                     <!--<div class="cards_load_more">
                     <a href="javascript:void(0);">Scroll down to load more...</a>
                      </div>-->
+                    <div class="d-flex justify-content-center">
+                        <nav>
+                            @if (Model.Count == 0)
+                            {
+                                <p class="text-center alert-danger">NO ITEM HAS NAME @name</p>
+                                <div>
+                                    <a href="/home/cards/@ViewBag.ParentCategory">Back to List</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    @Html.PagedListPager(Model, page => Url.Action("cards", "home", new { page = page, name = name, categoryId = categoryId }),
+                                             new PagedListRenderOptions
+                                {
+
+                                    LiElementClasses = new[] { "page-item" },
+                                    PageClasses = new[] { "page-link", "btn", "btn-primary" }
+                                })
+                                </div>
+                            }
+                        </nav>
+                    </div>
                 </div>
                 
                 <div id="loading" align="center"></div>
-                <div class="pagination_area mt_35 xs_mb_60 wow fadeInUp">
-                    <nav aria-label="Page navigation example">
-                        @if (Model.Count == 0)
-                        {
-                            <p class="text-center alert-danger">NO ITEM HAS NAME @name</p>
-                            <div>
-                                <a href="/home/cards/@ViewBag.ParentCategory">Back to List</a>
-                            </div>
-                        }
-                        else
-                        {
-                            <div>
-                                @Html.PagedListPager(Model, page => Url.Action("cards", "home", new { page = page, name = name, categoryId = categoryId }),
-                                         new PagedListRenderOptions
-                            {
-                                UlElementClasses = new[] { "pagination", "justify-content-center" },
-                                LiElementClasses = new[] { "page-item" },
-                                PageClasses = new[] { "page-link btn btn-button" }
-                            })
-                            </div>
-                        }
-                    </nav>
-                </div>
+                
             </div>
         </div>
         <!-- Cards Category Right End-->
-
+        
     </div>
     <!-- Cards Category Area End-->
     <div class="clearfix"></div>
+    
 </div>
