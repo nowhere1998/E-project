@@ -45,7 +45,7 @@ namespace E_project.Areas.Admin.Controllers
                 var context = await _context.Cards.Include(p => p.Category).ToListAsync();
                 if (!string.IsNullOrEmpty(search))
                 {
-                    context = context.Where(b => b.CardName.ToLower().Contains(search.ToLower())).ToList();
+                    context = context.Where(b => b.CardName.ToLower().Trim().Contains(search.ToLower().Trim())).ToList();
                     ViewBag.search = search;
                 }
                 var cards = context.ToPagedList(page, pageSize);
