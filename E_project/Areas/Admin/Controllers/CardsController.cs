@@ -31,24 +31,24 @@ namespace E_project.Areas.Admin.Controllers
             if (categoryId != 0)
             {
                 ViewBag.id = categoryId;
-                var bTL_Sem3Context = await _context.Cards.Include(p => p.Category).Where(p => p.CategoryId == categoryId).ToListAsync();
+                var context = await _context.Cards.Include(p => p.Category).Where(p => p.CategoryId == categoryId).ToListAsync();
                 if (!string.IsNullOrEmpty(search))
                 {
-                    bTL_Sem3Context = bTL_Sem3Context.Where(b => b.CardName.Contains(search)).ToList();
+                    context = context.Where(b => b.CardName.ToLower().Contains(search.ToLower())).ToList();
                     ViewBag.search = search;
                 }
-                var cards = bTL_Sem3Context.ToPagedList(page, pageSize);
+                var cards = context.ToPagedList(page, pageSize);
                 return View(cards);
             }
             else
             {
-                var bTL_Sem3Context = await _context.Cards.Include(p => p.Category).ToListAsync();
+                var context = await _context.Cards.Include(p => p.Category).ToListAsync();
                 if (!string.IsNullOrEmpty(search))
                 {
-                    bTL_Sem3Context = bTL_Sem3Context.Where(b => b.CardName.Contains(search)).ToList();
+                    context = context.Where(b => b.CardName.ToLower().Contains(search.ToLower())).ToList();
                     ViewBag.search = search;
                 }
-                var cards = bTL_Sem3Context.ToPagedList(page, pageSize);
+                var cards = context.ToPagedList(page, pageSize);
                 return View(cards);
             }
 
