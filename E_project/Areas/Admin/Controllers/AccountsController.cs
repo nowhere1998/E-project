@@ -97,6 +97,8 @@ namespace E_project.Areas.Admin.Controllers
                 account.Password = Cipher.GenerateMD5(account.Password);
                 _context.Add(account);
                 await _context.SaveChangesAsync();
+                TempData["message"] = "Account successfully created.";
+                TempData["state"] = "Successfully.";
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.role = Role();
@@ -159,6 +161,9 @@ namespace E_project.Areas.Admin.Controllers
                     ViewBag.reLogin = true;
                     return View("Details", account);
                 }
+
+                TempData["message"] = "Account successfully updated.";
+                TempData["state"] = "Successfully.";
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.allowEdit = allowEdit;
@@ -201,6 +206,8 @@ namespace E_project.Areas.Admin.Controllers
             }
 
             await _context.SaveChangesAsync();
+            TempData["message"] = "Account successfully deleted.";
+            TempData["state"] = "Successfully.";
             return RedirectToAction(nameof(Index));
         }
 

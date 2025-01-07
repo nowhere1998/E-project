@@ -54,7 +54,7 @@
                     <input type="hidden" asp-for="AccountId" />
                     <input type="hidden" asp-for="Image" />
                     <input type="hidden" asp-for="CreationDate" />
-
+                    <input type="hidden" asp-for="Password" />
                     <input type="hidden" name="allowEdit" value="@ViewBag.allowEdit" />
                     @if (allowEdit)
                     {
@@ -86,7 +86,7 @@
                         <div class="row">
                             <div class="form-group col-6">
                                 <label asp-for="Password" class="control-label"></label>
-                                <input name="newPassword" class="form-control" / type="password" placeholder="Leave blank if you do not want to change the password.">
+                                <input name="newPassword" class="form-control" type="password" placeholder="Leave blank if you do not want to change the password.">
                                 <input asp-for="Password" type="hidden" />
                             </div>
                             <div class="form-group col-6">
