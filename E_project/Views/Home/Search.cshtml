@@ -127,7 +127,7 @@
                         else
                         {
                             <div>
-                                @Html.PagedListPager(Model, page => Url.Action("cards", "home", new { page = page, cardName = cardName, parentCategory = parentCategory }),
+                                @Html.PagedListPager(Model, page => Url.Action("search", "home", new { page = page, cardName = cardName, parentCategory = parentCategory }),
                                          new PagedListRenderOptions
                             {
                                 UlElementClasses = new[] { "pagination", "justify-content-center" },
