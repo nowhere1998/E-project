@@ -21,7 +21,7 @@ namespace E_project.Areas.Admin.Controllers
         // GET: Admin/Accounts
         public async Task<IActionResult> Index(string? search, int page = 1)
         {
-            int pageSize = 10;
+            int pageSize = 6;
             var results = await _context.Accounts.ToListAsync();
             if (page < 1)
             {
