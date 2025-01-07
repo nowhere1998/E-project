@@ -29,7 +29,7 @@ namespace E_project.Areas.Admin.Controllers
             }
             if (!string.IsNullOrEmpty(search))
             {
-                results = results.Where(a => a.AccountName.ToLower().Contains(search.ToLower())).ToList();
+                results = results.Where(a => a.AccountName.ToLower().Trim().Contains(search.ToLower().Trim())).ToList();
             }
             var accounts = results.ToPagedList(page, pageSize);
             ViewBag.search = search;

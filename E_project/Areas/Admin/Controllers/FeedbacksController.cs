@@ -28,7 +28,7 @@ namespace E_project.Areas.Admin.Controllers
             }
             if (!string.IsNullOrEmpty(search))
             {
-                results = results.Where(f => f.Account.AccountName.ToLower().Contains(search.ToLower())).ToList();
+                results = results.Where(f => f.Account.AccountName.ToLower().Trim().Contains(search.ToLower().Trim())).ToList();
             }
             var feedbacks = results.ToPagedList(page, pageSize);
             ViewBag.search = search;

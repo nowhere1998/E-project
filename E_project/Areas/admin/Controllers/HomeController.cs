@@ -65,7 +65,7 @@ namespace E_project.Areas.Admin.Controllers
             }
             if (!string.IsNullOrEmpty(search))
             {
-                results = results.Where(td => td.Transaction.Account.AccountName.ToLower().Contains(search.ToLower())).ToList();
+                results = results.Where(td => td.Transaction.Account.AccountName.ToLower().Trim().Contains(search.ToLower().Trim())).ToList();
             }
             var transactionDetails = results.ToPagedList(page, pageSize);
             ViewBag.date = dateConvert.ToString("yyyy-MM-dd");

@@ -29,7 +29,7 @@ namespace E_project.Areas.Admin.Controllers
             }
             if (!string.IsNullOrEmpty(search))
             {
-                results = results.Where(c => c.CategoryName.ToLower().Contains(search.ToLower())).ToList();
+                results = results.Where(c => c.CategoryName.ToLower().Trim().Contains(search.ToLower().Trim())).ToList();
             }
             var categories = results.ToPagedList(page, pageSize);
             ViewBag.search = search;
@@ -71,6 +71,12 @@ namespace E_project.Areas.Admin.Controllers
         {
             ViewBag.parentCategories = ParentCategories();
             ViewBag.status = Status();
+            var categories = _context.Categories.ToList();
+            if (categories.Any(c => c.CategoryName.ToLower().Equals(category.CategoryName.ToLower())))
+            {
+                ViewBag.errorName = "Category Name already exists";
+                return View(category);
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(category);
@@ -113,7 +119,12 @@ namespace E_project.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
+            var categories = _context.Categories.ToList();
+            if (categories.Any(c => c.CategoryName.ToLower().Equals(category.CategoryName.ToLower())))
+            {
+                ViewBag.errorName = "Category Name already exists";
+                return View(category);
+            }
             if (ModelState.IsValid)
             {
                 try

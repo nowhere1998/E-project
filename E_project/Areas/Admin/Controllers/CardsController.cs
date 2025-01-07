@@ -34,7 +34,7 @@ namespace E_project.Areas.Admin.Controllers
                 var context = await _context.Cards.Include(p => p.Category).Where(p => p.CategoryId == categoryId).ToListAsync();
                 if (!string.IsNullOrEmpty(search))
                 {
-                    context = context.Where(b => b.CardName.ToLower().Contains(search.ToLower())).ToList();
+                    context = context.Where(b => b.CardName.ToLower().Trim().Contains(search.ToLower().Trim())).ToList();
                     ViewBag.search = search;
                 }
                 var cards = context.ToPagedList(page, pageSize);
@@ -93,7 +93,7 @@ namespace E_project.Areas.Admin.Controllers
             var cards = _context.Cards.ToList();
             if (cards.Any(c => c.CardName.ToLower().Equals(card.CardName.ToLower())))
             {
-                ViewBag.errorName = "Card Name is valid";
+                ViewBag.errorName = "Card Name already exists";
                 ViewData["CategoryId"] = new SelectList(_context.Categories.Where(c => c.Status == true), "CategoryId", "CategoryName", card.CategoryId);
                 ViewBag.status = Status();
                 return View(card);
@@ -158,7 +158,7 @@ namespace E_project.Areas.Admin.Controllers
             }
             if (_context.Cards.AsNoTracking().FirstOrDefault(c => c.CardName.ToLower().Equals(card.CardName.ToLower()) && c.CardId != card.CardId) != null)
             {
-                ViewBag.errorName = "Card Name is valid";
+                ViewBag.errorName = "Card Name already exists";
                 ViewData["CategoryId"] = new SelectList(_context.Categories.Where(c => c.Status == true), "CategoryId", "CategoryName", card.CategoryId);
                 ViewBag.status = Status();
                 return View(card);

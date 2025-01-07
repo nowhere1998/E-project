@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label asp-for="CategoryName" class="control-label"></label>
                 <input asp-for="CategoryName" class="form-control" />
-                <span asp-validation-for="CategoryName" class="text-danger"></span>
+                <span asp-validation-for="CategoryName" class="text-danger">@ViewBag.errorName</span>
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
